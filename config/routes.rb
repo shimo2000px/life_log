@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root "static_pages#top"
 
-  get 'home', to: 'homes#top'
+  get "home", to: "homes#top"
 
   resources :users, only: %i[new create]
 
