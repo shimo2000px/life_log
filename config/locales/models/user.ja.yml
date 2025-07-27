@@ -1,0 +1,37 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+    attributes:
+      user:
+        first_name: 名前
+        last_name: 苗字
+        nick_name: ニックネーム
+        email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認
+        created_at: 登録日時
+        updated_at: 更新日時
+    errors:
+      models:
+        user:
+          attributes:
+            first_name:
+              blank: を入力してください
+              too_long: は%{count}文字以内で入力してください
+            last_name:
+              blank: を入力してください
+              too_long: は%{count}文字以内で入力してください
+            nick_name:
+              blank: を入力してください
+              too_long: は%{count}文字以内で入力してください
+            email:
+              blank: を入力してください
+              invalid: の形式が正しくありません
+              taken: は既に使用されています
+            password:
+              blank: を入力してください
+              too_short: は%{count}文字以上で入力してください
+            password_confirmation:
+              blank: を入力してください
+              confirmation: とパスワードの入力が一致しません

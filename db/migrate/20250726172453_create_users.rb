@@ -9,7 +9,7 @@ class CreateUsers < ActiveRecord::Migration[8.0]
       # アプリ固有のカラム
       t.string :first_name,       null: false
       t.string :last_name,        null: false
-      t.string :nick_name
+      t.string :nick_name,        null: false
 
       t.timestamps
     end
