@@ -1,0 +1,16 @@
+<h2>あなたの日記記録</h2>
+  
+  <% if @posts.any? %>
+    <% @posts.each do |post| %>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title"><%= post.title %></h5>
+          <p class="card-text"><%= truncate(post.content, length: 100) %></p>
+          <small class="text-muted"><%= post.created_at.strftime("%Y年%m月%d日") %></small>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="text-center text-muted">まだ日記がありません。</p>
+  <% end %>
+</div>
