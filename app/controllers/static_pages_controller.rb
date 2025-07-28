@@ -3,7 +3,10 @@ class StaticPagesController < ApplicationController
 
   def top
     # redirect_to home_path if logged_in?#ログインしていたらhomeページへリダイレクト
-    # return
-    # end
+    # ログイン前のページ
+  end
+
+  def home
+    # ログイン後のページ
   end
 end
