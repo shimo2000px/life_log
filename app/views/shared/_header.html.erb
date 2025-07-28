@@ -1,0 +1,39 @@
+<header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container">
+    <%= link_to "日記アプリ", root_path, class: "navbar-brand fw-bold text-primary" %>
+    
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+            data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div class="navbar-nav ms-auto">
+        <% if logged_in? %>
+          <!-- ログイン済みの場合 -->
+          <span class="nav-link text-muted">
+            <i class="fas fa-user me-1"></i>
+            <%= current_user.nick_name %>さん
+          </span>
+          
+          <%= link_to "日記投稿", "#", 
+                      class: "nav-link",
+                      title: "近日実装予定" %>
+          
+          <%= link_to "日記一覧", "#", 
+                      class: "nav-link",
+                      title: "近日実装予定" %>
+          
+          <%= link_to "プロフィール", "#", 
+                      class: "nav-link",
+                      title: "近日実装予定" %>
+          
+          <%= link_to "ログアウト", logout_path, 
+                      method: :delete, 
+                      class: "nav-link text-danger",
+                      data: { confirm: "本当にログアウトしますか？" } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</header>
