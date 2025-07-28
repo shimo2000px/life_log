@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      redirect_to posts_path, notice: '日記を投稿しました！えらい🫶'
+      redirect_to posts_path, notice: "日記を投稿しました！えらい🫶"
     else
       render :new, status: :unprocessable_entity
     end
