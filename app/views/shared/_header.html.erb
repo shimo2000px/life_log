@@ -14,18 +14,22 @@
           <!-- ログイン済みの場合 -->
           <span class="nav-link text-muted">
             <i class="fas fa-user me-1"></i>
+            <%= image_tag current_user.profile_image, 
+                      class: "rounded-circle me-1", 
+                      style: "width: 24px; height: 24px; object-fit: cover;" %>
             <%= current_user.nick_name %>さん
           </span>
           
           <%= link_to "日記投稿", new_post_path, 
                       class: "nav-link",
-                      title: "近日実装予定" %>
+                      title: "日記投稿" %>
           
           <%= link_to "日記記録", posts_path, class: "nav-link" %>
           
+          
           <%= link_to "プロフィール", profile_path, 
                       class: "nav-link",
-                      title: "近日実装予定" %>
+                      title: "プロフィール" %>
           
           <%= link_to "ログアウト", logout_path, 
                       method: :delete, 

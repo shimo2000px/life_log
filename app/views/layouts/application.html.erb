@@ -56,6 +56,8 @@
   <% if logged_in? %>
     <%= render 'shared/header' %>
   <% end %>
+
+  
   
   <!-- フラッシュメッセージ -->
   <% flash.each do |message_type, message| %>
@@ -71,5 +73,7 @@
     <%= yield %>
   </main>
   <%= yield :javascript %>
+  
+  <%= render 'shared/footer' %>
   </body>
 </html>
