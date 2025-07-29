@@ -1,0 +1,29 @@
+<div class="container pt-5">
+  <div class="row mb-3">
+    <div class="col-lg-8 offset-lg-2">
+      <h1><%= @post.title %></h1>
+      <div class="mb-3">
+        <small class="text-muted">
+          投稿者: <%= @post.title %> | 
+          <%= @post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+        </small>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <%= simple_format(@post.body) %>
+        </div>
+      </div>
+      
+      <!-- 擬似いいね機能も入れてみましょう！ -->
+      <div class="mt-3">
+        <span class="text-danger">❤️ <%= @post.body.length / 10 + 1 %></span>
+      </div>
+      
+      <div class="mt-3">
+ 
+                    confirm: "本当に削除しますか？", class: "btn btn-danger" %>
+        <%= link_to "一覧に戻る", posts_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>
