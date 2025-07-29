@@ -9,4 +9,12 @@ class StaticPagesController < ApplicationController
   def home
     # ログイン後のページ
   end
+
+  def contact
+    # お問い合わせページ
+  end
+
+  def terms
+    # 地用規約ページ
+  end
 end
