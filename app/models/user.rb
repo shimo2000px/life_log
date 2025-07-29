@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   authenticates_with_sorcery!
 
+  has_one_attached :profile_image
   has_many :posts, dependent: :destroy
 
   validates :first_name, presence: true, length: { maximum: 255 }
