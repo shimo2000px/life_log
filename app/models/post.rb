@@ -6,7 +6,7 @@ class Post < ApplicationRecord
 
   def auto_likes_count
     body_length = body.length
-    
+
     case body_length
     when 0..20
       rand(80..150)
@@ -19,23 +19,23 @@ class Post < ApplicationRecord
     else
       rand(800..1200)
     end
-  
+
     base_likes = body.length * rand(8..12)
-  
+
   # ポジティブワードボーナス
   positive_words = %w[嬉しい 楽しい 良かった 最高 素晴らしい 幸せ 感謝 ありがとう 頑張]
   positive_bonus = positive_words.count { |word| body.include?(word) } * rand(100..200)
-  
+
   # お疲れ様ワードボーナス
   pessimistic_words = %w[疲れた 辛い 苦しい 最悪 大変 不幸 頑張った 無理 嫌だ]
   pessimistic_bonus = pessimistic_words.count { |word| body.include?(word) } * rand(100..200)
-  
-  total = base_likes + positive_bonus + pessimistic_bonus
-  
-  # 最低保証いいね数
-  [total, 50].max
 
-    # 投稿IDをシードにしてランダム値を固定
+  total = base_likes + positive_bonus + pessimistic_bonus
+
+  # 最低保証いいね数
+  [ total, 50 ].max
+
+  # 投稿IDをシードにしてランダム値を固定
   Random.srand(id)
   result = body.length * Random.rand(8..12)
   Random.srand # リセット
