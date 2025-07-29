@@ -1,5 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_login
+  before_action :check_owner, only: [:edit, :update, :destroy]
 
   def index
     @posts = current_user.posts.order(created_at: :desc)
@@ -23,12 +24,36 @@ class PostsController < ApplicationController
   end
 
   def edit
+    @post = Post.find(params[:id])
+    alert = '削除権限がありません' unless @post.user == current_user
   end
 
   def update
+    @post = Post.find(params[:id])
+    redirect_to posts_path, alert = '削除権限がありません' unless @post.user == current_user
+
+
+    if @post.update(post_params)
+      redirect_to posts_path(@post), notice: '投稿を更新しました'
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+  @post = Post.find(params[:id])
+  redirect_to posts_path, alert = '削除権限がありません' unless @post.user == current_user
+  
+  @post.destroy
+  redirect_to posts_path, danger: '投稿を削除しました'
   end
 
   private
+
+  def check_owner
+    @post = Post.find(params[:id])
+    redirect_to posts_path, alert = '削除権限がありません' unless @post.user == current_user
+  end
 
   def post_params
     params.require(:post).permit(:title, :body)
