@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   def create
     @post = current_user.posts.new(post_params)
     if @post.save
-      redirect_to posts_path, notice: "日記を投稿しました！えらい🫶"
+      redirect_to posts_path, success: "日記を投稿しました！えらいです🫶"
     else
       render :new, status: :unprocessable_entity
     end
@@ -34,7 +34,7 @@ class PostsController < ApplicationController
 
 
     if @post.update(post_params)
-      redirect_to posts_path(@post), notice: '投稿を更新しました'
+      redirect_to posts_path(@post), success: '投稿を更新しました'
     else
       render :edit
     end
