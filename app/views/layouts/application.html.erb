@@ -20,6 +20,35 @@
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+
+    <style>
+.heart-animation {
+  display: inline-block;
+  animation: heartBeat 0.6s ease-in-out;
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.likes-counter .count {
+  font-weight: bold;
+  color: #black;
+  font-size: 1.1em;
+}
+</style>
+
   </head>
 
   <body class="d-flex flex-column min-vh-100">
@@ -41,5 +70,6 @@
   <main class="flex-grow-1">
     <%= yield %>
   </main>
+  <%= yield :javascript %>
   </body>
 </html>
