@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="/assets/likes_counter.css">
+
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>あなたの日記記録</h2>
@@ -6,20 +8,28 @@
 
   <% if @posts.any? %>
     <% @posts.each_with_index do |post, index| %>
-      <div class="card mb-3">
+      <div class="card mb-3 shadow-sm">
         <div class="card-body">
+          <!-- カード表示 -->
           <h5 class="card-title"><%= post.title %></h5>
           <p class="card-text"><%= truncate(post.body, length: 100) %></p>
-          <small class="text-muted"><%= post.created_at.strftime("%Y年%m月%d日 %H:%M") %></small>
-          <%= link_to "詳細を見る", post_path(post), class: "btn btn-outline-primary btn-sm" %>
-
-        <!-- 擬似いいね機能 -->
+          <small class="text-muted">
+            <i class="bi bi-calendar"></i>
+            <%= post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+          </small>
+          
           <div class="d-flex justify-content-between align-items-center mt-3">
-            <div class="likes-counter" data-target="<%= post.auto_likes_count %>" data-index="<%= index %>">
-              <span class="heart-icon">❤️いいね</span>
-              <span class="count">0</span>
-              <!-- ★ ハートアニメーション用コンテナ追加 ★ -->
-              <div class="hearts-container"></div>
+            <div>
+              <%= link_to "詳細を見る", post_path(post), class: "btn btn-outline-primary btn-sm" %>
+            </div>
+            
+            <!-- 擬似いいね機能 -->
+            <div class="likes-counter-instagram" data-target="<%= post.auto_likes_count %>" data-index="<%= index %>">
+              <div class="likes-block">
+                <span class="heart-icon" data-original="♡" data-liked="♥">♡</span>
+                <span class="count">0</span>
+                <div class="hearts-container"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -33,96 +43,4 @@
   <% end %>
 </div>
 
-<%= content_for :javascript do %>
-<script>
-document.addEventListener('turbo:load', function() {
-  document.querySelectorAll('.likes-counter:not(.animated)').forEach(function(element, index) {
-    const counter = element.querySelector('.count');
-    const heartsContainer = element.querySelector('.hearts-container');
-    const target = parseInt(element.dataset.target);
-    
-    if (!counter || !target || target <= 0) return;
-    
-    element.classList.add('animated');
-    
-    setTimeout(() => {
-      // 数字カウントアニメーション
-      let current = 0;
-      const increment = Math.ceil(target / 50);
-      
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          counter.textContent = target.toLocaleString();
-          clearInterval(timer);
-        } else {
-          counter.textContent = current.toLocaleString();
-        }
-      }, 30);
-      
-      // ★ ハートアニメーション（修正版） ★
-      if (heartsContainer) {
-        animateExplodingHearts(heartsContainer, target);
-      }
-    }, index * 200);
-  });
-});
-
-// ★ 爆発ハートアニメーション関数（修正版） ★
-function animateExplodingHearts(container, targetCount) {
-  const heartCount = Math.min(Math.floor(targetCount / 100), 8); // 100いいねごとに1ハート、最大8個
-  
-  if (heartCount <= 0) return;
-  
-  // コンテナを相対配置に設定
-  container.style.position = 'relative';
-  container.style.display = 'inline-block';
-  container.style.width = '1px';
-  container.style.height = '1px';
-  
-  // 一気にハートを生成
-  for (let i = 0; i < heartCount; i++) {
-    setTimeout(() => {
-      createExplodingHeart(container, i, heartCount);
-    }, i * 150); // 150ms間隔でハート生成
-  }
-}
-
-function createExplodingHeart(container, index, totalHearts) {
-  const heart = document.createElement('span');
-  const heartTypes = ['💖', '💕', '💗', '🧡', '💛', '💚', '💙', '💜'];
-  heart.textContent = heartTypes[index % heartTypes.length];
-  heart.className = 'exploding-heart';
-  
-  // 円形に配置（8方向に分散）
-  const angle = (Math.PI * 2 * index) / totalHearts;
-  const distance = Math.random() * 60 + 30; // 30-90pxの距離
-  const endX = Math.cos(angle) * distance;
-  const endY = Math.sin(angle) * distance;
-  
-  heart.style.position = 'absolute';
-  heart.style.left = '0px';
-  heart.style.top = '0px';
-  heart.style.transform = 'translate(-50%, -50%) scale(0)';
-  heart.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-  heart.style.pointerEvents = 'none';
-  heart.style.zIndex = '1000';
-  heart.style.fontSize = (Math.random() * 8 + 16) + 'px'; // ランダムサイズ
-  
-  container.appendChild(heart);
-  
-  // アニメーション開始
-  setTimeout(() => {
-    heart.style.transform = `translate(calc(-50% + ${endX}px), calc(-50% + ${endY}px)) scale(1)`;
-    heart.style.opacity = '0';
-  }, 100);
-  
-  // 清掃
-  setTimeout(() => {
-    if (heart.parentNode) {
-      heart.remove();
-    }
-  }, 1300);
-}
-</script>
-<% end %>
+<script src="/assets/likes_counter.js"></script>

@@ -1,0 +1,93 @@
+<%= content_for :head do %>
+<style>
+/* ★ インスタグラム風いいねブロック ★ */
+.likes-counter-instagram {
+  position: relative;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+.likes-block {
+  background: linear-gradient(135deg, #e91e63, #f44336);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  position: relative;
+  min-width: 80px;
+  justify-content: center;
+}
+
+.likes-block:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+}
+
+.heart-icon {
+  font-size: 18px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.likes-block .count {
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  min-width: 40px;
+  text-align: left;
+}
+
+.hearts-container {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.exploding-heart {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1001;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.likes-block.animating {
+  animation: heartbeat 0.6s ease-in-out;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(1.05); }
+  75% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+  .likes-block {
+    padding: 6px 12px;
+    font-size: 12px;
+    min-width: 70px;
+  }
+
+  .heart-icon {
+  font-size: 16px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  transition: all 0.3s ease; /* ★ 変化をスムーズに */
+}
+
+.heart-icon.liked {
+  color: #ff3040; /* ♥の時の色 */
+  transform: scale(1.1);
+}
+}
+</style>
+<% end %>
