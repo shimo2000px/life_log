@@ -1,3 +1,101 @@
+<%= content_for :head do %>
+<style>
+/* ★ インスタグラム風いいねブロック ★ */
+.likes-counter-instagram {
+  position: relative;
+  display: inline-block;
+  margin: 10px 0;
+}
+
+.likes-block {
+  background: linear-gradient(135deg, #e91e63, #f44336);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 4px 15px rgba(233, 30, 99, 0.3);
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  position: relative;
+  min-width: 80px;
+  justify-content: center;
+}
+
+.likes-block:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+}
+
+.heart-icon {
+  font-size: 18px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.likes-block .count {
+  font-family: 'Arial', sans-serif;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  min-width: 40px;
+  text-align: left;
+}
+
+.hearts-container {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  left: 50%;
+  top: 50%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.exploding-heart {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1001;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.likes-block.animating {
+  animation: heartbeat 0.6s ease-in-out;
+}
+
+@keyframes heartbeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(1.05); }
+  75% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 768px) {
+  .likes-block {
+    padding: 6px 12px;
+    font-size: 12px;
+    min-width: 70px;
+  }
+  
+  .heart-icon {
+    font-size: 16px;
+  }
+
+  .heart-icon {
+  font-size: 16px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  transition: all 0.3s ease; /* ★ 変化をスムーズに */
+}
+
+.heart-icon.liked {
+  color: #ff3040; /* ♥の時の色 */
+  transform: scale(1.1);
+}
+}
+</style>
+<% end %>
+
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2>あなたの日記記録</h2>
@@ -15,8 +113,9 @@
 
         <!-- 擬似いいね機能 -->
           <div class="d-flex justify-content-between align-items-center mt-3">
-            <div class="likes-counter" data-target="<%= post.auto_likes_count %>" data-index="<%= index %>">
-              <span class="heart-icon">❤️いいね</span>
+            <div class="likes-counter-instagram" data-target="<%= post.auto_likes_count %>" data-index="<%= index %>">
+              <div class="likes-block">
+              <span class="heart-icon" data-original="♡" data-liked="♥">♡</span>
               <span class="count">0</span>
               <!-- ★ ハートアニメーション用コンテナ追加 ★ -->
               <div class="hearts-container"></div>
@@ -36,9 +135,11 @@
 <%= content_for :javascript do %>
 <script>
 document.addEventListener('turbo:load', function() {
-  document.querySelectorAll('.likes-counter:not(.animated)').forEach(function(element, index) {
+  document.querySelectorAll('.likes-counter-instagram:not(.animated)').forEach(function(element, index) {
     const counter = element.querySelector('.count');
     const heartsContainer = element.querySelector('.hearts-container');
+    const likesBlock = element.querySelector('.likes-block');
+    const heartIcon = element.querySelector('.heart-icon');
     const target = parseInt(element.dataset.target);
     
     if (!counter || !target || target <= 0) return;
@@ -46,6 +147,9 @@ document.addEventListener('turbo:load', function() {
     element.classList.add('animated');
     
     setTimeout(() => {
+      // ★ ブロックにハートビートアニメーション追加 ★
+      likesBlock.classList.add('animating');
+      
       // 数字カウントアニメーション
       let current = 0;
       const increment = Math.ceil(target / 50);
@@ -55,12 +159,19 @@ document.addEventListener('turbo:load', function() {
         if (current >= target) {
           counter.textContent = target.toLocaleString();
           clearInterval(timer);
+          
+          // アニメーション終了
+          setTimeout(() => {
+            heartIcon.textContent = heartIcon.dataset.liked;
+            heartIcon.classList.add('liked');
+            likesBlock.classList.remove('animating');
+          }, 200);
         } else {
           counter.textContent = current.toLocaleString();
         }
       }, 30);
       
-      // ★ ハートアニメーション（修正版） ★
+      // ★ ハート爆発アニメーション ★
       if (heartsContainer) {
         animateExplodingHearts(heartsContainer, target);
       }
@@ -68,61 +179,57 @@ document.addEventListener('turbo:load', function() {
   });
 });
 
-// ★ 爆発ハートアニメーション関数（修正版） ★
+// ★ インスタ風ハート爆発アニメーション ★
 function animateExplodingHearts(container, targetCount) {
-  const heartCount = Math.min(Math.floor(targetCount / 100), 8); // 100いいねごとに1ハート、最大8個
+  const heartCount = Math.min(Math.floor(targetCount / 50), 15); // より多くのハート
   
   if (heartCount <= 0) return;
   
-  // コンテナを相対配置に設定
-  container.style.position = 'relative';
-  container.style.display = 'inline-block';
-  container.style.width = '1px';
-  container.style.height = '1px';
-  
-  // 一気にハートを生成
+  // ハート生成
   for (let i = 0; i < heartCount; i++) {
     setTimeout(() => {
-      createExplodingHeart(container, i, heartCount);
-    }, i * 150); // 150ms間隔でハート生成
+      createInstagramHeart(container, i, heartCount);
+    }, i * 100);
   }
 }
 
-function createExplodingHeart(container, index, totalHearts) {
+function createInstagramHeart(container, index, totalHearts) {
   const heart = document.createElement('span');
-  const heartTypes = ['💖', '💕', '💗', '🧡', '💛', '💚', '💙', '💜'];
+  const heartTypes = ['💖', '💕', '💗', '🧡', '💛', '💚', '💙', '💜', '❤️', '🤍'];
   heart.textContent = heartTypes[index % heartTypes.length];
   heart.className = 'exploding-heart';
   
-  // 円形に配置（8方向に分散）
-  const angle = (Math.PI * 2 * index) / totalHearts;
-  const distance = Math.random() * 60 + 30; // 30-90pxの距離
+  // 円形配置（より美しく分散）
+  const angle = (Math.PI * 2 * index) / totalHearts + (Math.random() - 0.5) * 0.5;
+  const distance = Math.random() * 100 + 80; // 80-180pxの距離
   const endX = Math.cos(angle) * distance;
   const endY = Math.sin(angle) * distance;
   
   heart.style.position = 'absolute';
   heart.style.left = '0px';
   heart.style.top = '0px';
-  heart.style.transform = 'translate(-50%, -50%) scale(0)';
-  heart.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  heart.style.transform = 'translate(-50%, -50%) scale(0) rotate(0deg)';
+  heart.style.transition = 'all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
   heart.style.pointerEvents = 'none';
-  heart.style.zIndex = '1000';
-  heart.style.fontSize = (Math.random() * 8 + 16) + 'px'; // ランダムサイズ
+  heart.style.zIndex = '1001';
+  heart.style.fontSize = (Math.random() * 10 + 18) + 'px'; // 18-28px
+  heart.style.opacity = '1';
   
   container.appendChild(heart);
   
-  // アニメーション開始
+  // ★ 美しいアニメーション開始 ★
   setTimeout(() => {
-    heart.style.transform = `translate(calc(-50% + ${endX}px), calc(-50% + ${endY}px)) scale(1)`;
+    const rotation = (Math.random() - 0.5) * 720; // ランダム回転
+    heart.style.transform = `translate(calc(-50% + ${endX}px), calc(-50% + ${endY}px)) scale(1.2) rotate(${rotation}deg)`;
     heart.style.opacity = '0';
-  }, 100);
+  }, 50);
   
   // 清掃
   setTimeout(() => {
     if (heart.parentNode) {
       heart.remove();
     }
-  }, 1300);
+  }, 2050);
 }
 </script>
 <% end %>
