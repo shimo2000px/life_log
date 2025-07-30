@@ -8,21 +8,28 @@
 
   <% if @posts.any? %>
     <% @posts.each_with_index do |post, index| %>
-      <div class="card mb-3">
+      <div class="card mb-3 shadow-sm">
         <div class="card-body">
+          <!-- カード表示 -->
           <h5 class="card-title"><%= post.title %></h5>
           <p class="card-text"><%= truncate(post.body, length: 100) %></p>
-          <small class="text-muted"><%= post.created_at.strftime("%Y年%m月%d日 %H:%M") %></small>
-          <%= link_to "詳細を見る", post_path(post), class: "btn btn-outline-primary btn-sm" %>
-
-        <!-- 擬似いいね機能 -->
+          <small class="text-muted">
+            <i class="bi bi-calendar"></i>
+            <%= post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+          </small>
+          
           <div class="d-flex justify-content-between align-items-center mt-3">
+            <div>
+              <%= link_to "詳細を見る", post_path(post), class: "btn btn-outline-primary btn-sm" %>
+            </div>
+            
+            <!-- 擬似いいね機能 -->
             <div class="likes-counter-instagram" data-target="<%= post.auto_likes_count %>" data-index="<%= index %>">
               <div class="likes-block">
-              <span class="heart-icon" data-original="♡" data-liked="♥">♡</span>
-              <span class="count">0</span>
-              <!-- ★ ハートアニメーション用コンテナ追加 ★ -->
-              <div class="hearts-container"></div>
+                <span class="heart-icon" data-original="♡" data-liked="♥">♡</span>
+                <span class="count">0</span>
+                <div class="hearts-container"></div>
+              </div>
             </div>
           </div>
         </div>
