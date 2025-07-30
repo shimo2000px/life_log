@@ -3,11 +3,12 @@ class PostsController < ApplicationController
   before_action :check_owner, only: [ :edit, :update, :destroy ]
 
   def index
-    @posts = current_user.posts.order(created_at: :desc)
+    @posts = current_user.posts.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def new
     @post = current_user.posts.new
+    
   end
 
   def create

@@ -32,6 +32,10 @@ gem "solid_cable"
 
 gem "sorcery", "0.16.3"
 
+gem 'kaminari', '1.2.2'
+
+gem 'bootstrap5-kaminari-views'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
