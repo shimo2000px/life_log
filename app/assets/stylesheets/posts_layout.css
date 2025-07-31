@@ -1,0 +1,30 @@
+body {
+  background: linear-gradient(135deg, #f0f9f0 0%, #e8f5e8 100%);
+  min-height: 100vh;
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN', 
+sans-serif;
+
+}
+
+/* カード背景 */
+.post-card {
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(74, 124, 89, 0.1);
+}
+
+/* アクセントカラー */
+.btn-primary {
+  background: linear-gradient(135deg, #4a7c59, #6b8e6b);
+  border: none;
+}
+
+.date-badge {
+  background: linear-gradient(135deg, #4a7c59, #6b8e6b);
+}
+
+/* ヘッダー */
+.navbar {
+  background: rgba(74, 124, 89, 0.95);
+  backdrop-filter: blur(10px);
+}

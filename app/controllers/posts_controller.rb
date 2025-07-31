@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :check_owner, only: [ :edit, :update, :destroy ]
 
   def index
-    @posts = current_user.posts.order(created_at: :desc)
+    @posts = current_user.posts.includes(:user).order(created_at: :desc).page(params[:page])
   end
 
   def new
@@ -56,6 +56,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:title, :body, :diary_date)
   end
 end
