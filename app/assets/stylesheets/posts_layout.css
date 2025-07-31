@@ -1,6 +1,9 @@
 body {
   background: linear-gradient(135deg, #f0f9f0 0%, #e8f5e8 100%);
   min-height: 100vh;
+  font-family: 'ヒラギノ丸ゴ ProN','Hiragino Maru Gothic ProN', 
+sans-serif;
+
 }
 
 /* カード背景 */
