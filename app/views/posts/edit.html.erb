@@ -13,6 +13,11 @@
             </ul>
           </div>
         <% end %>
+
+        <div class="mb-3">
+          <%= f.label :diary_date, "日記の日付", class: "form-label" %>
+          <%= f.date_field :diary_date, class: "form-control", value: Date.current %>
+        </div>
         
         <div class="mb-3">
           <%= f.label :title, "タイトル", class: "form-label" %>
