@@ -11,7 +11,7 @@
       <div class="card mb-3 shadow-sm">
         <div class="card-body">
           <!-- カード表示 -->
-          <span class="badge bg-primary me-2"><%= post.diary_date.strftime("%m/%d") %></span>
+          <span class="badge bg-primary me-2 fs-6 px-3 py-2"><%= post.diary_date.strftime("%m/%d") %></span>
           <h5 class="card-title"><%= post.title %></h5>
           <p class="card-text"><%= truncate(post.body, length: 100) %></p>
           <small class="text-muted">

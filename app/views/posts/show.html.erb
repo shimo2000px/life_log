@@ -3,6 +3,8 @@
 <div class="container pt-5">
   <div class="row mb-3">
     <div class="col-lg-8 offset-lg-2">
+    <span class="badge bg-primary me-2 fs-6 px-3 py-2"><%= @post.diary_date.strftime("%m/%d") %></span>
+
       <h1><%= @post.title %></h1>
       <div class="mb-3">
         <small class="text-muted">
