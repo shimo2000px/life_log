@@ -24,7 +24,11 @@
                     </ul>
                   </div>
                 <% end %>
-                
+                <!-- 日付入力 -->
+                  <div class="mb-3">
+                    <%= f.label :diary_date, "日記の日付", class: "form-label" %>
+                    <%= f.date_field :diary_date, class: "form-control", value: Date.current %>
+                  </div>
                 <!-- タイトル入力 -->
                 <div class="mb-4">
                   <%= f.label :title, 'タイトル', class: 'form-label fw-bold' %>
