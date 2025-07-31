@@ -12,14 +12,22 @@
       <div class="navbar-nav ms-auto">
         <% if logged_in? %>
           <!-- ログイン済みの場合 -->
-          <span class="nav-link text-muted">
-            <i class="fas fa-user me-1"></i>
-            <%= image_tag current_user.profile_image, 
-                      class: "rounded-circle me-1", 
-                      style: "width: 24px; height: 24px; object-fit: cover;" %>
+          <span class="navbar-text d-flex align-items-center">
+            <% if current_user.profile_image.present? %>
+              <%= image_tag current_user.profile_image, 
+                  class: "rounded-circle me-2", 
+                  style: "width: 32px; height: 32px; object-fit: cover;" %>
+            <% else %>
+              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2"
+                  style="width: 32px; height: 32px;">
+                <i class="fas fa-user text-muted" style="font-size: 14px;"></i>
+              </div>
+            <% end %>
             <%= current_user.nick_name %>さん
           </span>
           
+
+        <div class="navbar-text d-flex align-items-center">
           <%= link_to "日記投稿", new_post_path, 
                       class: "nav-link",
                       title: "日記投稿" %>
@@ -36,6 +44,7 @@
                       class: "nav-link text-danger",
                       data: { confirm: "本当にログアウトしますか？" } %>
         <% end %>
+        </div>
       </div>
     </div>
   </div>
