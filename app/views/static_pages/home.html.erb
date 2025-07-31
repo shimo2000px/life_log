@@ -3,40 +3,56 @@
 <head>
   <title>ホームページ</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
 </head>
 <body>
 
-
   <div class="container mt-5">
+    <!-- 動的メッセージ部分 -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-8 text-center">
+        <h2 id="greeting-message" class="greeting-message">いつもおつかれさまです</h2>
+        <p id="sub-message" class="sub-message">今日の出来事を振り返りましょう</p>
+      </div>
+    </div>
+
     <div class="row justify-content-center">
-      <div class="text-center">
-            <h2>今日もお疲れ様です</h2>
-            <p>今日の記録を付けてみましょう</p>
+      <div class="col-md-8">
+        <div class="triangle-layout">
+          <!-- 使い方 -->
+          <div class="text-center center-button">
+            <%= link_to '使い方', '#', 
+                        class: 'btn btn-info text-white btn-lg px-5' %>
+          </div>
+
+          <!-- 下部左右：投稿・閲覧ボタン -->
+          <div class="bottom-buttons">
+            <div class="flex-fill">
+              <div class="card h-100 border-primary">
+                <div class="card-body text-center">
+                  <h5 class="card-title mb-3">📝 記録する</h5>
+                  <p class="card-text">今日の出来事を記録しましょう</p>
+                  <%= link_to '日記投稿をする', new_post_path,
+                              class: 'btn btn-primary btn-lg w-100' %>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex-fill">
+              <div class="card h-100 border-success">
+                <div class="card-body text-center">
+                  <h5 class="card-title mb-3">📖 振り返る</h5>
+                  <p class="card-text">今までの日記を見てみましょう</p>
+                  <%= link_to '日記投稿を見る', posts_path,
+                              class: 'btn btn-success btn-lg w-100' %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-
-  <div class="row">
-  <div class="col-md-6 mb-3">
-    <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-text">今日の出来事を記録しましょう</h5>
-        <%= link_to '日記投稿をする', new_post_path,
-                    class: 'btn btn-primary btn-lg w-100' %>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-6 mb-3">
-    <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-text">今までの日記を見てみましょう</h5>
-        <%= link_to '日記投稿を見る', posts_path,
-                    class: 'btn btn-success btn-lg w-100' %>
-      </div>
-    </div>
-  </div>
-
 </body>
 </html>
