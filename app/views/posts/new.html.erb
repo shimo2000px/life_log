@@ -1,16 +1,15 @@
-<!-- app/views/posts/new.html.erb -->
 <div class="container mt-4">
   <div class="row justify-content-center">
     <div class="col-lg-12">
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1><i class="fas fa-pen"></i> 🌱新しい日記を書く</h1>
+        <h1 class="fade-in-up diary-title">新しい日記を書く</h1>
         <%= link_to '← 一覧に戻る', posts_path, class: 'btn btn-outline-secondary' %>
       </div>
       
       <div class="row">
         <!-- フォーム部分 -->
         <div class="col-lg-8">
-          <div class="card mb-4">
+          <div class="card mb-4 fade-in-up">
             <div class="card-body">
               <%= form_with model: @post, local: true do |f| %>
                 <!-- エラーメッセージ表示 -->
@@ -43,7 +42,7 @@
                   <%= f.text_area :body, 
                       class: 'form-control', 
                       rows: 12, 
-                      placeholder: '今日あったことを自由に書いてみましょう' %>
+                      placeholder: '自分の感情や出来事を書き出すことで、ストレスを軽減し、精神的安定につながると言われています。' %>
                 </div>
                 
                 <!-- 送信ボタン -->
@@ -56,13 +55,12 @@
           </div>
         </div>
 
-<!-- メッセージ -->
-<%= stylesheet_link_tag 'diary_components', 'data-turbolinks-track': 'reload' %>
+<link rel="stylesheet" href="/diary_components.css">
 
 <div class="col-lg-4">
   <div class="card border-0 shadow-sm mb-4 rounded-3">
       <!-- ヒントカード：今日の出来事 -->
-      <div class="hint-item thought mb-0 p-4 rounded">
+      <div class="hint-item thought mb-0 p-4 rounded fade-in-up">
         <div class="d-flex align-items-start">
           <div class="hint-icon me-3">
             <span class="badge bg-primary rounded-circle p-2">💭</span>
@@ -75,7 +73,7 @@
       </div>
       
       <!-- ヒントカード：感情 -->
-      <div class="hint-item emotion mb-0 p-4 rounded">
+      <div class="hint-item emotion mb-0 p-4 rounded fade-in-up">
         <div class="d-flex align-items-start">
           <div class="hint-icon me-3">
             <span class="badge bg-success rounded-circle p-2">😊</span>
@@ -88,7 +86,7 @@
       </div>
       
       <!-- ヒントカード：頑張ったこと -->
-      <div class="hint-item effort mb-0 p-4 rounded">
+      <div class="hint-item effort mb-0 p-4 rounded fade-in-up">
         <div class="d-flex align-items-start">
           <div class="hint-icon me-3">
             <span class="badge bg-warning rounded-circle p-2">🔥</span>
@@ -101,7 +99,7 @@
       </div>
       
       <!-- ヒントカード：新しい発見 -->
-      <div class="hint-item discovery mb-0 p-4 rounded">
+      <div class="hint-item discovery mb-0 p-4 rounded fade-in-up">
         <div class="d-flex align-items-start">
           <div class="hint-icon me-3">
             <span class="badge bg-danger rounded-circle p-2">🌟</span>
@@ -115,7 +113,7 @@
   </div>
   
   <!-- メッセージカード -->
-  <div class="card border-0 shadow-sm mb-4">
+  <div class="card border-0 shadow-sm mb-4 fade-in-up">
     <div class="card-body text-center p-4 message-card-body">
       <div class="mb-3">
         <i class="fas fa-heart text-white" style="font-size: 2rem;"></i>

@@ -1,51 +1,77 @@
 <header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
   <div class="container">
+    <!-- ブランド -->
     <%= link_to "日記アプリ", 
                 current_user ? home_path : root_path, 
                 class: "navbar-brand fw-bold text-primary" %>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-            data-bs-target="#navbarNav">
+    
+    <!-- ハンバーガーボタン（重要な修正箇所） -->
+    <button class="navbar-toggler" 
+            type="button" 
+            data-bs-toggle="collapse" 
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     
+    <!-- 折りたたみ可能なナビゲーション -->
     <div class="collapse navbar-collapse" id="navbarNav">
-      <div class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto">
         <% if logged_in? %>
-          <!-- ログイン済みの場合 -->
-          <span class="navbar-text d-flex align-items-center">
-            <% if current_user.profile_image.present? %>
-              <%= image_tag current_user.profile_image, 
-                  class: "rounded-circle me-2", 
-                  style: "width: 32px; height: 32px; object-fit: cover;" %>
-            <% else %>
-              <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2"
-                  style="width: 32px; height: 32px;">
-                <i class="fas fa-user text-muted" style="font-size: 14px;"></i>
-              </div>
-            <% end %>
-            <%= current_user.nick_name %>さん
-          </span>
+          <!-- プロフィール情報 -->
+          <li class="nav-item d-flex align-items-center me-3">
+            <span class="navbar-text d-flex align-items-center">
+              <% if current_user.profile_image.present? %>
+                <%= image_tag current_user.profile_image, 
+                    class: "rounded-circle me-2", 
+                    style: "width: 32px; height: 32px; object-fit: cover;" %>
+              <% else %>
+                <div class="rounded-circle bg-light d-flex align-items-center justify-content-center me-2"
+                    style="width: 32px; height: 32px;">
+                  <i class="fas fa-user text-muted" style="font-size: 14px;"></i>
+                </div>
+              <% end %>
+              <%= current_user.nick_name %>さん
+            </span>
+          </li>
           
-
-        <div class="navbar-text d-flex align-items-center">
-          <%= link_to "日記投稿", new_post_path, 
-                      class: "nav-link",
-                      title: "日記投稿" %>
+          <!-- ナビゲーションリンク -->
+          <li class="nav-item">
+            <%= link_to "日記投稿", new_post_path, 
+                        class: "nav-link mt-1",
+                        title: "日記投稿" %>
+          </li>
           
-          <%= link_to "日記一覧", posts_path, class: "nav-link" %>
+          <li class="nav-item">
+            <%= link_to "日記一覧", posts_path, class: "nav-link mt-1" %>
+          </li>
           
+          <li class="nav-item">
+            <%= link_to "プロフィール", profile_path, 
+                        class: "nav-link mt-1",
+                        title: "プロフィール" %>
+          </li>
           
-          <%= link_to "プロフィール", profile_path, 
-                      class: "nav-link",
-                      title: "プロフィール" %>
-          
-          <%= link_to "ログアウト", logout_path, 
-                      method: :delete, 
-                      class: "nav-link text-danger",
-                      data: { confirm: "本当にログアウトしますか？" } %>
+          <li class="nav-item">
+            <%= link_to "ログアウト", logout_path,  
+                        class: "nav-link text-danger mt-1",
+                        data: { 
+                          turbo_method: :delete,
+                          turbo_confirm: "本当にログアウトしますか？"
+                        } %>
+          </li>
+        <% else %>
+          <!-- ログイン前のメニュー -->
+          <li class="nav-item">
+            <%= link_to "ログイン", login_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "新規登録", new_user_registration_path, class: "nav-link" %>
+          </li>
         <% end %>
-        </div>
-      </div>
+      </ul>
     </div>
   </div>
 </header>

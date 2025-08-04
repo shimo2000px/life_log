@@ -1,42 +1,60 @@
-<!DOCTYPE html>
-<html>
-<head>
   <title>ホームページ</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-</head>
-<body>
-
+  <link rel="stylesheet" href="/home.css">
 
   <div class="container mt-5">
-    <div class="row justify-content-center">
-      <div class="text-center">
-            <h2>今日もお疲れ様です</h2>
-            <p>今日の記録を付けてみましょう</p>
+    <!-- 動的メッセージ部分 -->
+    <div class="row justify-content-center mb-5">
+      <div class="col-md-8 text-center mt-5">
+        <h2 id="greeting-message" class="greeting-message">いつもおつかれさまです</h2>
+        <p id="sub-message" class="sub-message">今日の出来事を振り返りましょう<br>
+        🌱🌱🌱</p>
+      </div>
+    </div>
+
+
+  <div class="home-container">
+    <!-- 下部左右：投稿・閲覧ボタン -->
+    <div class="bottom-buttons text-center">
+      <div class="mb-4" style="max-width: 300px; margin: 0 auto;">
+        <div class="card h-100 border-success opacity-75 p-2" style="font-size: 0.9rem;">
+          <div class="card-body text-center p-2">
+            <h6 class="card-title mb-2"><span>🔰</span> 使い方</h6>
+            <p class="card-text mb-2">アプリの使い方を確認しましょう</p>
+            <%= link_to '使い方を見る', '#', class: 'btn btn-success text-white btn-sm w-100' %>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
 
-  <div class="row">
-  <div class="col-md-6 mb-3">
-    <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-text">今日の出来事を記録しましょう</h5>
-        <%= link_to '日記投稿をする', new_post_path,
-                    class: 'btn btn-primary btn-lg w-100' %>
+
+
+  <div class="home-container">
+    <!-- 下部左右：投稿・閲覧ボタン -->
+    <div class="bottom-buttons">
+      <div class="flex-fill mb-4">
+        <div class="card h-100 border-primary opacity-75">
+          <div class="card-body text-center">
+            <h5 class="card-title mb-3"><span>📝</span> 記録する</h5>
+            <p class="card-text">今日の出来事を記録しましょう</p>
+            <%= link_to '日記投稿をする', new_post_path,
+                        class: 'btn btn-primary btn-lg w-100' %>
+          </div>
+        </div>
+      </div>
+
+          <div class="flex-fill mb-4">
+            <div class="card h-100 border-info opacity-75">
+              <div class="card-body text-center">
+                <h5 class="card-title mb-3"><span>📖</span> 振り返る</h5>
+                <p class="card-text">今までの日記を見てみましょう</p>
+                <%= link_to '日記投稿を見る', posts_path,
+                            class: 'btn btn-info btn-lg w-100 text-white' %>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-
-  <div class="col-md-6 mb-3">
-    <div class="card h-100">
-      <div class="card-body">
-        <h5 class="card-text">今までの日記を見てみましょう</h5>
-        <%= link_to '日記投稿を見る', posts_path,
-                    class: 'btn btn-success btn-lg w-100' %>
-      </div>
-    </div>
-  </div>
-
-</body>
-</html>

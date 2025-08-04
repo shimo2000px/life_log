@@ -1,19 +1,19 @@
-<link rel="stylesheet" href="/assets/likes_counter.css">
+<link rel="stylesheet" href="/likes_counter.css">
 
 
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>あなたの日記一覧</h2>
+    <h2 class="diary-index fade-in-up">あなたの日記一覧</h2>
     <%= link_to '新しい日記を書く', new_post_path, class: 'btn btn-primary' %>
   </div>
 
   <% if @posts.any? %>
     <% @posts.each_with_index do |post, index| %>
-      <div class="card mb-3 shadow-sm">
+      <div class="diary-board card mb-3 shadow-sm fade-in-up">
         <div class="card-body post-card-body">
           <!-- 日付とタイトル -->
           <div class="mb-3">
-            <div class="card-header bg-success text-white">
+            <div class="diary-header card-header bg-success opacity-75 text-white">
               <span class="badge  me-2 fs-6 px-3 py-2"><%= post.diary_date.strftime("%m/%d") %></span>
               <h5 class="card-title d-inline-block mb-0 "><%= post.title %></h5>
           </div>
@@ -77,4 +77,4 @@
   <% end %>
 </div>
 
-<script src="/assets/likes_counter.js"></script>
+<script src="/likes_counter.js"></script>
