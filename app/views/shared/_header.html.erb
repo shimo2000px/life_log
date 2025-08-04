@@ -40,23 +40,23 @@
           <!-- ナビゲーションリンク -->
           <li class="nav-item">
             <%= link_to "日記投稿", new_post_path, 
-                        class: "nav-link",
+                        class: "nav-link mt-1",
                         title: "日記投稿" %>
           </li>
           
           <li class="nav-item">
-            <%= link_to "日記一覧", posts_path, class: "nav-link" %>
+            <%= link_to "日記一覧", posts_path, class: "nav-link mt-1" %>
           </li>
           
           <li class="nav-item">
             <%= link_to "プロフィール", profile_path, 
-                        class: "nav-link",
+                        class: "nav-link mt-1",
                         title: "プロフィール" %>
           </li>
           
           <li class="nav-item">
             <%= link_to "ログアウト", logout_path,  
-                        class: "nav-link text-danger",
+                        class: "nav-link text-danger mt-1",
                         data: { 
                           turbo_method: :delete,
                           turbo_confirm: "本当にログアウトしますか？"
