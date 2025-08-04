@@ -9,11 +9,11 @@
 
   <% if @posts.any? %>
     <% @posts.each_with_index do |post, index| %>
-      <div class="card mb-3 shadow-sm">
+      <div class="diary-board card mb-3 shadow-sm">
         <div class="card-body post-card-body">
           <!-- 日付とタイトル -->
           <div class="mb-3">
-            <div class="card-header bg-success opacity-75 text-white">
+            <div class="diary-header card-header bg-success opacity-75 text-white">
               <span class="badge  me-2 fs-6 px-3 py-2"><%= post.diary_date.strftime("%m/%d") %></span>
               <h5 class="card-title d-inline-block mb-0 "><%= post.title %></h5>
           </div>

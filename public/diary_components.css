@@ -50,8 +50,9 @@
 }
 
 .diary-title{
+  border-radius: 10px;
   font-size: 2.5rem;
   font-weight: bold; 
-  background: linear-gradient(45deg, #47a998, #28a745);
+  background: linear-gradient(135deg, #20bb82, #64af8c);
   color: white
 }
