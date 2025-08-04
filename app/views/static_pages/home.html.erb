@@ -1,16 +1,15 @@
-  <title>ホームページ</title>
+  <% content_for(:title, 'ホームページ') %>
   <link rel="stylesheet" href="/home.css">
 
   <div class="container mt-5">
     <!-- 動的メッセージ部分 -->
     <div class="row justify-content-center mb-5">
       <div class="col-md-8 text-center mt-5">
-        <h2 id="greeting-message" class="greeting-message">いつもおつかれさまです</h2>
+        <h2 id="greeting-message" class="greeting-message">毎日おつかれさまです</h2>
         <p id="sub-message" class="sub-message">今日の出来事を振り返りましょう<br>
         🌱🌱🌱</p>
       </div>
     </div>
-
 
   <div class="home-container">
     <!-- 下部左右：投稿・閲覧ボタン -->
@@ -26,9 +25,6 @@
       </div>
     </div>
   </div>
-
-
-
 
   <div class="home-container">
     <!-- 下部左右：投稿・閲覧ボタン -->
