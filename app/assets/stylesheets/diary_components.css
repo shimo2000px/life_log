@@ -50,9 +50,28 @@
 }
 
 .diary-title{
-  border-radius: 10px;
   font-size: 2.5rem;
-  font-weight: bold; 
-  background: linear-gradient(135deg, #20bb82, #64af8c);
-  color: white
+  font-weight: bold;
+  background: linear-gradient(135deg, #22e19b, #7cd9ae);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 共通のアニメーションクラス */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.2s ease-out forwards;
 }

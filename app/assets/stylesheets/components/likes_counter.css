@@ -91,11 +91,12 @@
 }
 
 .diary-index{
-  border-radius: 10px;
   font-size: 2.5rem;
-  font-weight: bold; 
-  background: linear-gradient(135deg, #20bb82, #64af8c);
-  color: white
+  font-weight: bold;
+  background: linear-gradient(135deg, #22e19b, #7cd9ae);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .diary-board{
@@ -110,5 +111,25 @@
 .diary-header{
   background: linear-gradient(135deg, #20bb82, #64af8c);
 }
+
+/* アニメーション定義 */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 共通アニメーション用クラス */
+.fade-in-up {
+  opacity: 0;
+  animation: fadeInUp 1s ease-out forwards;
+}
+
+
 </style>
 <% end %>

@@ -3,13 +3,13 @@
 
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
-    <h2 class="diary-index">あなたの日記一覧</h2>
+    <h2 class="diary-index fade-in-up">あなたの日記一覧</h2>
     <%= link_to '新しい日記を書く', new_post_path, class: 'btn btn-primary' %>
   </div>
 
   <% if @posts.any? %>
     <% @posts.each_with_index do |post, index| %>
-      <div class="diary-board card mb-3 shadow-sm">
+      <div class="diary-board card mb-3 shadow-sm fade-in-up">
         <div class="card-body post-card-body">
           <!-- 日付とタイトル -->
           <div class="mb-3">
