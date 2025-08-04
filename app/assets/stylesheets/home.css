@@ -1,4 +1,10 @@
 /* 動的メッセージのアニメーション */
+
+body {
+  background-color: yellow !important;
+}
+
+
 .greeting-message {
   font-size: 3.5rem;
   font-weight: bold;
@@ -33,7 +39,6 @@
     transform: translateY(0);
   }
 }
-
 
 
 
@@ -94,14 +99,25 @@
 }
 
 .home-container .bottom-buttons .card {
+  background: linear-gradient(135deg, #f5fdfc, #e7f8f0); /* 淡いグラデーション */
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   border-radius: 15px;
   overflow: hidden;
 }
 
+
 .home-container .bottom-buttons .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  transform: scale(1.02);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.home-container .bottom-buttons .card .card-title span {
+  font-size: 2.2rem;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 
 .home-container .bottom-buttons .card.border-primary {

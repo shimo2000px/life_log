@@ -18,7 +18,7 @@
     <link rel="apple-touch-icon" href="/icon.png">
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
 
     <style>
@@ -51,7 +51,8 @@
 
   </head>
 
-  <body class="d-flex flex-column min-vh-100">
+  <body class="soft-green-bg d-flex flex-column min-vh-100">
+  
   <!-- ログイン時のみヘッダー表示 -->
   <% if logged_in? %>
     <%= render 'shared/header' %>
@@ -75,5 +76,7 @@
   <%= yield :javascript %>
   
   <%= render 'shared/footer' %>
+
+
   </body>
 </html>

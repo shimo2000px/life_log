@@ -39,10 +39,9 @@
                       class: "nav-link",
                       title: "プロフィール" %>
           
-          <%= link_to "ログアウト", logout_path, 
-                      method: :delete, 
+          <%= link_to "ログアウト", logout_path,  
                       class: "nav-link text-danger",
-                      data: { confirm: "本当にログアウトしますか？" } %>
+                      onclick: "return confirm('本当にログアウトしますか？')"  %>
         <% end %>
         </div>
       </div>
