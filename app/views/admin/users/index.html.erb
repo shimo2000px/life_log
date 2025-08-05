@@ -3,6 +3,8 @@
 <table class="table table-bordered">
   <thead>
     <tr>
+      <th>姓</th>
+      <th>名</th>
       <th>名前</th>
       <th>メールアドレス</th>
       <th>操作</th>
@@ -12,6 +14,8 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= user.nick_name %></td>
+      <td><%= user.first_name %></td>
+      <td><%= user.last_name %></td>
       <td><%= user.email %></td>
       <td>
         <% if user == current_user %>
