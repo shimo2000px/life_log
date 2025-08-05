@@ -1,0 +1,13 @@
+<h2>新しいパスワードを設定</h2>
+
+<%= form_with url: password_reset_path(params[:id]), method: :patch, local: true do |form| %>
+  <div class="mb-3">
+    <%= form.label :password, '新しいパスワード' %>
+    <%= form.password_field :password, class: "form-control" %>
+  </div>
+  <div class="mb-3">
+    <%= form.label :password_confirmation, 'パスワード確認' %>
+    <%= form.password_field :password_confirmation, class: "form-control" %>
+  </div>
+  <%= form.submit "パスワードを更新", class: "btn btn-success" %>
+<% end %>
