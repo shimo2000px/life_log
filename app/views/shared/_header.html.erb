@@ -1,9 +1,10 @@
+<link rel="stylesheet" href="/header.css">
 <header class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
   <div class="container">
     <!-- ブランド -->
     <%= link_to "ふぅ日記", 
                 current_user ? home_path : root_path, 
-                class: "navbar-brand fw-bold text-success" %>
+                class: "navbar-brand fw-bold text-success yomogi-font" %>
     
     <!-- ハンバーガーボタン（重要な修正箇所） -->
     <button class="navbar-toggler" 
