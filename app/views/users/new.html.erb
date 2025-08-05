@@ -16,12 +16,12 @@
 
       <%= form_with model: @user, locale: true do |f| %>
         <div class="mb-3">
-          <%= f.label :last_name, '苗字', class: "form-label" %>
+          <%= f.label :last_name, '姓', class: "form-label" %>
           <%= f.text_field :last_name, class: "form-control" %>
         </div>
         
         <div class="mb-3">
-          <%= f.label :first_name, '名前', class: "form-label" %>
+          <%= f.label :first_name, '名', class: "form-label" %>
           <%= f.text_field :first_name, class: "form-control" %>
         </div>
         
@@ -37,9 +37,9 @@
         </div>
         
         <div class="mb-3">
-          <%= f.label :password, 'パスワード', class: "form-label" %>
+          <%= f.label :password, 'パスワード※', class: "form-label" %>
           <%= f.password_field :password, class: "form-control" %>
-          <div class="form-text">パスワードは6文字以上で登録してください</div>
+          <div class="form-text">6文字以上<br>※パスワードは必ずメモをお願いします</div>
         </div>
         
         <div class="mb-3">
