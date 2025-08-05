@@ -36,6 +36,9 @@ gem "kaminari", "1.2.2"
 
 gem "bootstrap5-kaminari-views"
 
+gem 'dotenv-rails'
+
+
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
 
