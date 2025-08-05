@@ -93,8 +93,3 @@ font-family: 'Yomogi', cursive; /* 手書きっぽいフォントを意識 */
   display: block;
   margin-bottom: 0.5rem;
 }
-
-.card-guide{
-  transform: scale(0.9) !important;;     
-  transform-origin: top center;
-}
