@@ -1,0 +1,33 @@
+<h1>ユーザー一覧</h1>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>名前</th>
+      <th>メールアドレス</th>
+      <th>操作</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.nick_name %></td>
+      <td><%= user.email %></td>
+      <td>
+        <% if user == current_user %>
+          <small>(自分自身)</small>
+        <% else %>
+          <%= link_to admin_user_path(user),
+                      class: "btn btn-danger btn-sm",
+                      data: {
+                        turbo_method: :delete,
+                        turbo_confirm: "本当に削除しますか？"
+                      } do %>
+            <i class="bi bi-trash"></i> 削除
+          <% end %>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
