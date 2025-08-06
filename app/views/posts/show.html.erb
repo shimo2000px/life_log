@@ -48,8 +48,18 @@
         <i class="bi bi-arrow-left"></i> 日記一覧に戻る
       <% end %>
     </div>
+
     <% if @post.user == current_user %>
-      <div class="btn-group">
+    <div class="btn-group">
+        
+          <%= link_to share_to_twitter_post_path(@post), 
+                      data: { method: :post }, 
+                      class: "btn btn-outline-success ", 
+                      title: "Twitterでシェア" do %>
+            <i class="bi bi-twitter "></i> Xで共有
+          <% end %>
+      
+    
         <%= link_to edit_post_path(@post), class: "btn btn-outline-primary" do %>
           <i class="bi bi-pencil"></i> 編集
         <% end %>

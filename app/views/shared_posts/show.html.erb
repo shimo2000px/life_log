@@ -1,0 +1,17 @@
+<div class="shared-post-page">
+  <header class="post-header">
+    <h1><%= @post.user.nickname %>さんの今日の頑張り</h1>
+    <p class="post-date"><%= @post.created_at.strftime('%Y年%m月%d日') %></p>
+  </header>
+  
+  <main class="post-content">
+    <h2 class="post-title"><%= @post.title %></h2>
+    
+    <div class="post-body">
+      <%= simple_format(@post.body) %>
+    </div>
+    
+    <!-- 画像がある場合 -->
+    <% if @post.image.present? %>
+      <div class="post-image">
+        <%= image_tag @post.image, alt: @post.title, class

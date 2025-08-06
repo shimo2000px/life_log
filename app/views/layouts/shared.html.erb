@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- 基本のOGPタグ -->
+  <meta property="og:title" content="<%= @post.user.nickname %>さんの今日の頑張り" />
+  <meta property="og:description" content="<%= truncate(@post.title, length: 100) %>" />
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="<%= request.original_url %>" />
+  
+  <!-- public配下の静的OGP画像 -->
+  <meta property="og:image" content="<%= request.base_url %>/huu.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="日記アプリ - 今日の頑張りをシェア" />
+  
+  <!-- X（Twitter）専用タグ -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="<%= @post.user.nickname %>さんの今日の頑張り" />
+  <meta name="twitter:description" content="<%= truncate(@post.title, length: 100) %>" />
+  <meta name="twitter:image" content="<%= request.base_url %>/huu.png" />
+  
+  <title><%= @post.user.nickname %>さんの今日の頑張り | 日記アプリ</title>
+  
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+</head>
+<body>
+  <div class="shared-post-container">
+    <%= yield %>
+    
+    <div class="cta-section">
+      <h3>あなたも今日の頑張りをシェアしませんか？</h3>
+      <%= link_to "アプリを始める", root_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+</body>
+</html>

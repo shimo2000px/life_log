@@ -4,7 +4,7 @@
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="diary-index fade-in-up">あなたの日記一覧</h2>
-    <%= link_to '新しい日記を書く', new_post_path, class: 'btn btn-primary' %>
+    <%= link_to '新しい日記を書く', new_post_path, class: 'btn btn-primary fade-in-up' %>
   </div>
 
   <% if @posts.any? %>
@@ -49,19 +49,40 @@
             </div>
 
             <!-- 右側：詳細ボタンといいね機能 -->
-            <div class="d-flex align-items-center">
-              <!-- 詳細ボタン -->
-              <div class="me-3">
-                <%= link_to "詳細を見る", post_path(post), class: "btn btn-outline-primary btn-sm" %>
-              </div>
+            <!-- 全体を横並びにする -->
+            <div class="d-flex justify-content-between align-items-center">
               
-              <!-- 擬似いいね機能 -->
-              <div class="likes-counter-instagram" data-target="<%= post.auto_likes_count %>" data-index="<%= index %>">
+              <!-- 左側：いいね機能 -->
+              <div class="likes-counter-instagram me-2" data-target="<%= post.auto_likes_count %>" data-index="<%= index %>">
                 <div class="likes-block">
                   <span class="heart-icon" data-original="♡" data-liked="♥">♡</span>
                   <span class="count">0</span>
                   <div class="hearts-container"></div>
                 </div>
+              </div>
+
+                <!-- 右側：詳細ボタン・Twitterボタン -->
+              <!-- 右側：詳細ボタン・Twitterボタン -->
+              <div class="btn-group">
+                <%= link_to post_path(post), 
+                            data: { method: :post }, 
+                            class: "btn btn-outline-primary", 
+                            title: "詳細" do %>
+                  <i class="bi bi-info-circle"></i> 詳細
+                <% end %>
+
+                <% if current_user == post.user %>
+                  <% tweet_text = "この日記をシェアします！" %>
+                  <% tweet_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(post_url(post, host: 'localhost:3000'))}&text=#{CGI.escape(tweet_text)}" %>
+
+                  <%= link_to tweet_url,
+                              class: "btn btn-outline-success ms-2",
+                              target: "_blank",
+                              rel: "noopener noreferrer",
+                              title: "Xで共有" do %>
+                    <i class="bi bi-twitter"></i> Xで共有
+                  <% end %>
+                <% end %>
               </div>
             </div>
           </div>
