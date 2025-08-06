@@ -7,10 +7,14 @@ Rails.application.routes.draw do
   post "login", to: "user_sessions#create"
   delete "logout", to: "user_sessions#destroy"
 
-
   get "up" => "rails/health#show", as: :rails_health_check
 
-  resources :posts, only: %i[index new create show edit destroy update]
+  resources :posts, only: %i[index new create show edit destroy update] do
+    member do
+      post :share_to_twitter  # シェア機能
+    end
+  end
+
   resources :users, only: %i[new create destroy]
   resources :password_resets, only: [ :new, :create, :edit, :update ]
   resource :profile, only: %i[show edit update]
@@ -18,6 +22,8 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: %i[index destroy]
   end
+
+  get '/shared/:token', to: 'shared_posts#show', as: :shared_post #シェア機能
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
