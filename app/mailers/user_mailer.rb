@@ -5,7 +5,7 @@ class UserMailer < ApplicationMailer
 
     mail(
       to: user.email,
-      subject: 'パスワードリセットのご案内'
+      subject: 'ふぅ日記パスワードリセットのご案内'
     )
   end
 end
