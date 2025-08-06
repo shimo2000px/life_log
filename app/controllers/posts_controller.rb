@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :require_login
   before_action :set_post, only: [:show, :edit, :update, :destroy, :share_to_twitter]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy, :share_to_twitter]
+  layout 'shared', only: [:share_to_twitter]
 
   def index
     @posts = current_user.posts.includes(:user).order(created_at: :desc).page(params[:page])
@@ -50,21 +51,18 @@ class PostsController < ApplicationController
 
 
   def share_to_twitter
+    @post = Post.includes(:user).find(params[:id])
+
     if @post.share_token.blank?
       @post.update!(share_token: SecureRandom.urlsafe_base64)
     end
-    
-    # シェア機能を有効化
-    @post.update!(is_shared: true)
-    
-    # シェア用URL生成
-    share_url = shared_post_url(@post.share_token)
-    
-    # Twitterシェア用URL生成
-    tweet_text = "#{@post.user.nick_name}さんの今日の頑張りをチェック！"
-    twitter_url = "https://twitter.com/intent/tweet?text=#{CGI.escape(tweet_text)}&url=#{CGI.escape(share_url)}"
-    
-    redirect_to twitter_url, allow_other_host: true
+
+    tweet_text = "この日記をシェアします！"
+    @share_url = shared_post_url(@post.share_token, host: 'a12af6182a8a.ngrok-free.app', protocol: 'https', port: nil)
+    tweet_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(@share_url)}&text=#{CGI.escape(tweet_text)}"
+
+    # ✅ Twitter投稿画面へ即リダイレクト
+    redirect_to tweet_url, allow_other_host: true
   end
 
 

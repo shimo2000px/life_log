@@ -1,0 +1,18 @@
+#シェア中間用　使わないけど一応残しとく
+<div class="container mt-5 text-center">
+  <h1>日記をシェアしよう</h1>
+
+  <p>以下のボタンからTwitterでこの日記をシェアできます：</p>
+
+  <p>
+    <%= link_to @tweet_url,
+                class: "btn btn-outline-primary",
+                target: "_blank",
+                rel: "noopener noreferrer" do %>
+      <i class="bi bi-twitter"></i> Xで共有
+    <% end %>
+  </p>
+
+  <p>このページのリンク:</p>
+  <code><%= @share_url %></code>
+</div>

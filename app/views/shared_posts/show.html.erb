@@ -1,6 +1,8 @@
+# 豪華にする　シェアページ
+
 <div class="shared-post-page">
   <header class="post-header">
-    <h1><%= @post.user.nickname %>さんの今日の頑張り</h1>
+    <h1><%= @post.user.nick_name %>さんの今日の頑張り</h1>
     <p class="post-date"><%= @post.created_at.strftime('%Y年%m月%d日') %></p>
   </header>
   
@@ -14,4 +16,6 @@
     <!-- 画像がある場合 -->
     <% if @post.image.present? %>
       <div class="post-image">
-        <%= image_tag @post.image, alt: @post.title, class
+        <%= image_tag @post.image, alt: @post.title, class: "shared-post-image" %>
+      </div>
+    <% end %>

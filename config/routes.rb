@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   resources :posts, only: %i[index new create show edit destroy update] do
     member do
-      post :share_to_twitter  # シェア機能
+      get :share_to_twitter  # シェア機能
       post :update_share_status
     end
   end

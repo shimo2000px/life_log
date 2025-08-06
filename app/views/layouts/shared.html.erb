@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- 基本のOGPタグ -->
-  <meta property="og:title" content="<%= @post.user.nickname %>さんの今日の頑張り" />
+  <meta property="og:title" content="<%= @post.user.nick_name %>さんの今日の頑張り" />
   <meta property="og:description" content="<%= truncate(@post.title, length: 100) %>" />
   <meta property="og:type" content="article" />
   <meta property="og:url" content="<%= request.original_url %>" />
@@ -18,11 +18,11 @@
   
   <!-- X（Twitter）専用タグ -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="<%= @post.user.nickname %>さんの今日の頑張り" />
+  <meta name="twitter:title" content="<%= @post.user.nick_name %>さんの今日の頑張り" />
   <meta name="twitter:description" content="<%= truncate(@post.title, length: 100) %>" />
   <meta name="twitter:image" content="<%= request.base_url %>/huu.png" />
   
-  <title><%= @post.user.nickname %>さんの今日の頑張り | 日記アプリ</title>
+  <title><%= @post.user.nick_name %>さんの今日の頑張り | 日記アプリ</title>
   
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
 </head>
