@@ -12,9 +12,12 @@ Rails.application.routes.draw do
 
   resources :posts, only: %i[index new create show edit destroy update]
   resources :users, only: %i[new create destroy]
+  resources :password_resets, only: [ :new, :create, :edit, :update ]
   resource :profile, only: %i[show edit update]
 
   namespace :admin do
     resources :users, only: %i[index destroy]
   end
+
+  mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
