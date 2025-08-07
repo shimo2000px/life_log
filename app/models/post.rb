@@ -44,9 +44,22 @@ class Post < ApplicationRecord
   end
 
   # Xシェア用トークンの生成
-  before_create :generate_share_token
 
   scope :shared, -> { where(is_shared: true) }
+
+  def generate_share_token!
+  return if share_token.present? # 既にトークンがある場合は生成しない
+  
+  update!(
+    share_token: SecureRandom.urlsafe_base64(32),
+    is_shared: true # is_sharedフラグも一緒に更新
+  )
+  end
+
+  def shared?
+    is_shared == true && share_token.present?
+  end
+
 
   private
 

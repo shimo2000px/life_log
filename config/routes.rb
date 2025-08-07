@@ -22,6 +22,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users, only: %i[index destroy]
+    resources :shared_posts, only: [:index, :destroy]
   end
 
   get "/shared/:token", to: "shared_posts#show", as: :shared_post # シェア機能

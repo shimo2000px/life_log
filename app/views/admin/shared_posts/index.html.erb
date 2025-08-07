@@ -1,0 +1,33 @@
+<h1>シェアされた投稿一覧</h1>
+
+<% if @shared_posts.any? %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>投稿者</th>
+        <th>タイトル</th>
+        <th>投稿日</th>
+        <th>共有URL</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @shared_posts.each do |post| %>
+        <tr>
+          <td><%= post.user.nick_name %></td>
+          <td><%= post.title %></td>
+          <td><%= l(post.created_at, format: :short) %></td>
+          <td>
+            <%= link_to shared_post_url(post.share_token, host: 'd4bc3ac321f7.ngrok-free.app'), target: "_blank"  do %>
+              シェアリンク
+            <% end %>
+          </td>
+          <td>
+      <%= link_to '削除', admin_shared_post_path(post), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: "btn btn-danger btn-sm" %>          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>現在、シェアされている投稿はありません。</p>
+<% end %>
