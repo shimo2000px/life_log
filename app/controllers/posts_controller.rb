@@ -51,21 +51,25 @@ class PostsController < ApplicationController
 
 
   def share_to_twitter
-    @post = Post.includes(:user).find(params[:id])
+    @post = Post.find(params[:id])
 
+    # トークンがなければ生成
     if @post.share_token.blank?
-      @post.update!(share_token: SecureRandom.urlsafe_base64)
+      @post.share_token = SecureRandom.urlsafe_base64(32)
     end
 
-  @post.is_shared = true
+    # is_shared を true に（管理者画面で取得対象にする）
+    @post.is_shared = true
 
-  @post.save! if @post.changed?
+    # 変更があれば保存
+    @post.save! if @post.changed?
 
+    # シェア用の文言とURLを生成
     tweet_text = "#{@post.user.nick_name}さんの素敵な1日をのぞいてみよう✨ #ふぅ日記"
-    @share_url = shared_post_url(@post.share_token, host: "d4bc3ac321f7.ngrok-free.app", protocol: "https", port: nil)
-    tweet_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(@share_url)}&text=#{CGI.escape(tweet_text)}"
+    share_url = shared_post_url(@post.share_token, host: "d4bc3ac321f7.ngrok-free.app", protocol: "https", port: nil)
+    tweet_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(share_url)}&text=#{CGI.escape(tweet_text)}"
 
-    # ✅ Twitter投稿画面へ即リダイレクト
+    # Twitter投稿画面にリダイレクト
     redirect_to tweet_url, allow_other_host: true
   end
 
