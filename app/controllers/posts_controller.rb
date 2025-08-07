@@ -1,8 +1,8 @@
 class PostsController < ApplicationController
   before_action :require_login
-  before_action :set_post, only: [:show, :edit, :update, :destroy, :share_to_twitter]
-  before_action :ensure_correct_user, only: [:edit, :update, :destroy, :share_to_twitter]
-  layout 'shared', only: [:share_to_twitter]
+  before_action :set_post, only: [ :show, :edit, :update, :destroy, :share_to_twitter ]
+  before_action :ensure_correct_user, only: [ :edit, :update, :destroy, :share_to_twitter ]
+  layout "shared", only: [ :share_to_twitter ]
 
   def index
     @posts = current_user.posts.includes(:user).order(created_at: :desc).page(params[:page])
@@ -62,7 +62,7 @@ class PostsController < ApplicationController
   @post.save! if @post.changed?
 
     tweet_text = "#{@post.user.nick_name}さんの素敵な1日をのぞいてみよう✨ #ふぅ日記"
-    @share_url = shared_post_url(@post.share_token, host: 'd4bc3ac321f7.ngrok-free.app', protocol: 'https', port: nil)
+    @share_url = shared_post_url(@post.share_token, host: "d4bc3ac321f7.ngrok-free.app", protocol: "https", port: nil)
     tweet_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(@share_url)}&text=#{CGI.escape(tweet_text)}"
 
     # ✅ Twitter投稿画面へ即リダイレクト
@@ -75,11 +75,11 @@ class PostsController < ApplicationController
   def set_post
     @post = current_user.posts.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-    @post = Post.find(params[:id]) if action_name == 'show'
+    @post = Post.find(params[:id]) if action_name == "show"
   end
 
   def ensure_correct_user
-    redirect_to posts_path, alert: '権限がありません。' unless @post.user == current_user
+    redirect_to posts_path, alert: "権限がありません。" unless @post.user == current_user
   end
 
   def check_owner

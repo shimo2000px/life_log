@@ -45,14 +45,12 @@ class Post < ApplicationRecord
 
   # Xシェア用トークンの生成
   before_create :generate_share_token
-  
+
   scope :shared, -> { where(is_shared: true) }
-  
+
   private
-  
+
   def generate_share_token
     self.share_token = SecureRandom.urlsafe_base64(32)
   end
-
-
 end

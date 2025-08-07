@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     resources :users, only: %i[index destroy]
   end
 
-  get '/shared/:token', to: 'shared_posts#show', as: :shared_post #シェア機能
+  get "/shared/:token", to: "shared_posts#show", as: :shared_post # シェア機能
 
   mount LetterOpenerWeb::Engine, at: "/letter_opener" if Rails.env.development?
 end
