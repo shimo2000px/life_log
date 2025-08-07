@@ -74,13 +74,13 @@
                 <% if current_user == post.user %>
                   <% tweet_text = "この日記をシェアします！" %>
                   <% tweet_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(shared_post_url(post.share_token, host: 'd4bc3ac321f7.ngrok-free.app'))}&text=#{CGI.escape(tweet_text)}" %>
-  <%= link_to share_to_twitter_post_path(post),
-            class: "btn btn-outline-success ms-2",
-            target: "_blank",
-            rel: "noopener noreferrer",
-            title: "Xで共有" do %>
-  <i class="bi bi-twitter"></i> Xで共有
-<% end %>
+                    <%= link_to share_to_twitter_post_path(post),
+                              class: "btn btn-outline-success ms-2",
+                              target: "_blank",
+                              rel: "noopener noreferrer",
+                              title: "Xで共有" do %>
+                    <i class="bi bi-twitter"></i> Xで共有
+                  <% end %>
                 <% end %>
               </div>
             </div>
