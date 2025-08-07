@@ -6,8 +6,8 @@
       <tr>
         <th>投稿者</th>
         <th>タイトル</th>
-        <th>投稿日</th>
-        <th>共有URL</th>
+        <th>内容</th>
+        <th>投稿日/th>
         <th>操作</th>
       </tr>
     </thead>
@@ -16,7 +16,7 @@
         <tr>
           <td><%= post.user.nick_name %></td>
           <td><%= post.title %></td>
-          <td><%= l(post.created_at, format: :short) %></td>
+          <td><%= post.body %></td>
           <td>
             <%= link_to shared_post_url(post.share_token, host: 'd4bc3ac321f7.ngrok-free.app'), target: "_blank"  do %>
               シェアリンク
