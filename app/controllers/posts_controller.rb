@@ -57,8 +57,12 @@ class PostsController < ApplicationController
       @post.update!(share_token: SecureRandom.urlsafe_base64)
     end
 
+  @post.is_shared = true
+
+  @post.save! if @post.changed?
+
     tweet_text = "この日記をシェアします！"
-    @share_url = shared_post_url(@post.share_token, host: 'a12af6182a8a.ngrok-free.app', protocol: 'https', port: nil)
+    @share_url = shared_post_url(@post.share_token, host: '8de1262935bb.ngrok-free.app', protocol: 'https', port: nil)
     tweet_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(@share_url)}&text=#{CGI.escape(tweet_text)}"
 
     # ✅ Twitter投稿画面へ即リダイレクト
