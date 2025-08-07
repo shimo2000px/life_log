@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="/share.css">
+
+<div class="container mt-5">
+  <h1 class="fade-in-up share-title">✨<%= @post.user.nick_name %>さんの素敵な1日✨</h1>
+  <div class="diary-board card mb-3 shadow-sm fade-in-up">
+    <div class="card-body post-card-body">
+
+      <!-- 日付とタイトル -->
+      <div class="mb-3">
+        <div class="diary-header card-header bg-success opacity-75 text-white">
+          <span class="badge me-2 fs-6 px-3 py-2"><%= @post.diary_date.strftime("%m/%d") %></span>
+          <h3 class="card-title d-inline-block mb-0"><%= @post.title %></h3>
+        </div>
+      </div>
+
+      <!-- 投稿内容 -->
+      <p class="card-text me-2 fs-4 px-3 py-2 mb-3"><%= simple_format(@post.body) %></p>
+
+
+      <!-- ユーザー情報と投稿日時 -->
+      <div class="d-flex align-items-center mb-3">
+        <div class="me-3">
+          <% if @post.user.profile_image.present? %>
+            <%= image_tag @post.user.profile_image, 
+                          class: "rounded-circle", 
+                          style: "width: 60px; height: 60px; object-fit: cover;" %>
+          <% else %>
+            <div class="rounded-circle bg-light d-flex align-items-center justify-content-center" 
+                style="width: 60px; height: 60px;">
+              <i class="fas fa-user text-muted"></i>
+            </div>
+          <% end %>
+        </div>
+        <div>
+          <div class="fw-bold text-dark mb-1 fs-7"><%= @post.user.nick_name %></div>
+          <small class="text-muted">
+            <i class="bi bi-calendar me-1"></i>
+            <%= @post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
+          </small>
+          <div class="likes-counter-instagram ms-2" data-target="<%= @post.auto_likes_count || 0 %>" data-index="0">
+            <div class="likes-block">
+              <span class="heart-icon" data-original="♡" data-liked="♥">♡</span>
+              <span class="count">0</span>
+              <div class="hearts-container"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="cta-section my-5 py-4 px-3 text-center bg-light rounded shadow fade-in-up">
+  <h3 class="mb-3 fw-bold text-shadow">
+    <i class="bi bi-pencil-square me-2 "></i>あなたも今日の出来事をシェアしませんか？
+  </h3>
+  <%= link_to "日記を書いてみる", root_path, class: " btn btn-lg bi bi-pencil-fill text-primary px-4 py-2 fw-bold  diary-button" %>
+</div>
+
+<script src="/share.js"></script>

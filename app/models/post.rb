@@ -42,4 +42,27 @@ class Post < ApplicationRecord
   Random.srand # リセット
   result
   end
+
+  # Xシェア用トークンの生成
+
+  scope :shared, -> { where(is_shared: true) }
+
+  # 投稿作成時に share_token を生成する（is_shared は false のまま）
+  before_create :generate_share_token
+
+  # シェア済みにするメソッド（管理者画面以外でシェアボタン押した時など）
+  def share!
+    update!(is_shared: true)
+  end
+
+  # shared? 判定メソッド（シェア済みかどうか）
+  def shared?
+    is_shared == true && share_token.present?
+  end
+
+  private
+
+  def generate_share_token
+    self.share_token ||= SecureRandom.urlsafe_base64(32)
+  end
 end
