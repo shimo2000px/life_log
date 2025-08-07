@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="/share.css">
 
 <div class="container mt-5">
-<h1 class="fade-in-up"><%= @post.user.nick_name %>さんの今日の頑張り</h1>
+<h1 class="fade-in-up share-title">✨<%= @post.user.nick_name %>さんの頑張った記録✨</h1>
   <div class="diary-board card mb-3 shadow-sm fade-in-up">
     <div class="card-body post-card-body">
 
@@ -57,9 +57,11 @@
   </div>
 </div>
 
-    <div class="cta-section ms-4">
-      <h3 class="fade-in-up">あなたも今日の頑張りをシェアしませんか？</h3>
-      <%= link_to "日記を書いてみる", root_path, class: "btn btn-primary fade-in-up" %>
-    </div>
+<div class="cta-section my-5 py-4 px-3 text-center bg-light rounded shadow fade-in-up">
+  <h3 class="mb-3 fw-bold text-shadow">
+    <i class="bi bi-pencil-square me-2 "></i>あなたも今日の出来事をシェアしませんか？
+  </h3>
+  <%= link_to "日記を書いてみる", root_path, class: " btn btn-lg  text-warning px-4 py-2 fw-bold  diary-button" %>
+</div>
 
 <script src="/share.js"></script>

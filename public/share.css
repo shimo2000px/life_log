@@ -133,3 +133,33 @@ body{
   background-color: antiquewhite;
 }
 
+.diary-button {
+  border: 1px solid #1b7e40;
+  border-radius: 1rem;
+  background: #1b7e40;
+  background: -webkit-gradient(linear, left bottom, left top, color-stop(50%, #1b7e40), to(#20b958));
+  background: -webkit-linear-gradient(bottom, #1b7e40 50%, #20b958 100%);
+  background: linear-gradient(0deg, #1b7e40 50%, #20b958 100%);
+  -webkit-box-shadow: inset 0 1px 1px rgba(255, 255, 255, .6), 0 5px 10px rgba(0, 0, 0, .1);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, .6), 0 5px 10px rgba(0, 0, 0, .1);
+}
+
+.diary-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 128, 0, 0.4);
+}
+
+.share-title{
+  font-size: 2.5rem;
+  font-weight: bold;
+  background: linear-gradient(45deg, #56bdac, #28a745);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  margin-bottom: 1rem;
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 1.0s ease-out forwards;
+}
+

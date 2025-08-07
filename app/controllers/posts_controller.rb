@@ -61,7 +61,7 @@ class PostsController < ApplicationController
 
   @post.save! if @post.changed?
 
-    tweet_text = "この日記をシェアします！"
+    tweet_text = "#{@post.user.nick_name}さんの素敵な1日をのぞいてみよう✨ #ふぅ日記"
     @share_url = shared_post_url(@post.share_token, host: 'd4bc3ac321f7.ngrok-free.app', protocol: 'https', port: nil)
     tweet_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(@share_url)}&text=#{CGI.escape(tweet_text)}"
 
