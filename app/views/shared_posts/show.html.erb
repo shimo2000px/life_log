@@ -1,9 +1,7 @@
-# 豪華にする　シェアページ
-
 <link rel="stylesheet" href="/share.css">
 
 <div class="container mt-5">
-<h1 class="fade-in-up share-title">✨<%= @post.user.nick_name %>さんの頑張った記録✨</h1>
+<h1 class="fade-in-up share-title">✨<%= @post.user.nick_name %>さんの素敵な1日✨</h1>
   <div class="diary-board card mb-3 shadow-sm fade-in-up">
     <div class="card-body post-card-body">
 
@@ -39,18 +37,15 @@
             <i class="bi bi-calendar me-1"></i>
             <%= @post.created_at.strftime("%Y年%m月%d日 %H:%M") %>
           </small>
+          <div class="likes-counter-instagram ms-2" data-target="<%= @post.auto_likes_count || 0 %>" data-index="0">
+            <div class="likes-block">
+              <span class="heart-icon" data-original="♡" data-liked="♥">♡</span>
+              <span class="count">0</span>
+              <div class="hearts-container"></div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <!-- ✅ いいねカウンター（アニメーション対応） -->
-      <div class="likes-counter-instagram" data-target="<%= @post.auto_likes_count || 0 %>" data-index="0">
-        <div class="likes-block">
-          <span class="heart-icon" data-original="♡" data-liked="♥">♡</span>
-          <span class="count">0</span>
-          <div class="hearts-container"></div>
-        </div>
-      </div>
-
 
 
     </div>
@@ -61,7 +56,7 @@
   <h3 class="mb-3 fw-bold text-shadow">
     <i class="bi bi-pencil-square me-2 "></i>あなたも今日の出来事をシェアしませんか？
   </h3>
-  <%= link_to "日記を書いてみる", root_path, class: " btn btn-lg  text-warning px-4 py-2 fw-bold  diary-button" %>
+  <%= link_to "日記を書いてみる", root_path, class: " btn btn-lg bi bi-pencil-fill text-primary px-4 py-2 fw-bold  diary-button" %>
 </div>
 
 <script src="/share.js"></script>
