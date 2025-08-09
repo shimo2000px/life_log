@@ -12,22 +12,24 @@
     </div>
 
   <div class="home-container">
-    <!-- 下部左右：投稿・閲覧ボタン -->
     <div class="bottom-buttons text-center">
       <div class="mb-4" style="max-width: 300px; margin: 0 auto;">
         <div class="card h-100 border-success opacity-75 p-2" style="font-size: 0.9rem;">
           <div class="card-body text-center p-2">
             <h6 class="card-title mb-2"><span>🔰</span> 使い方</h6>
             <p class="card-text mb-2">アプリの使い方を確認しましょう</p>
-            <%= link_to '使い方を見る', '#', class: 'btn btn-success text-white btn-sm w-100' %>
+            <button type="button" class="btn btn-success opacity-75 text-white" data-bs-toggle="modal" data-bs-target="#usage">
+              使い方を開く
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
+  <%= render "shared/usage" %>
+
   <div class="home-container">
-    <!-- 下部左右：投稿・閲覧ボタン -->
     <div class="bottom-buttons">
       <div class="flex-fill mb-4 px-4">
         <div class="card h-100 border-primary opacity-75">
