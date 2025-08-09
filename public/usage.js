@@ -105,5 +105,5 @@ if (window.location.hostname === 'localhost') {
       console.log('backdrops:', backdropsCount);
       forceModalCleanup();
     }
-  }, 1000); // 1秒ごとにチェック
+  }, 500); // 0.5秒ごとにチェック
 }
