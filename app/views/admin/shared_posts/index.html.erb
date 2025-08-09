@@ -17,11 +17,7 @@
           <td><%= post.user.nick_name %></td>
           <td><%= post.title %></td>
           <td><%= post.body %></td>
-          <td>
-            <%= link_to shared_post_url(post.share_token, host: 'd4bc3ac321f7.ngrok-free.app'), target: "_blank"  do %>
-              シェアリンク
-            <% end %>
-          </td>
+          <td><%= post.created_at %></td>
           <td>
       <%= link_to '削除', admin_shared_post_path(post), data: { turbo_method: :delete, turbo_confirm: '本当に削除しますか？' }, class: "btn btn-danger btn-sm" %>          </td>
         </tr>

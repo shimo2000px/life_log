@@ -18,8 +18,10 @@
           <div class="card-body text-center p-2">
             <h6 class="card-title mb-2"><span>🔰</span> 使い方</h6>
             <p class="card-text mb-2">アプリの使い方を確認しましょう</p>
-            <button type="button" class="btn btn-success opacity-75 text-white" data-bs-toggle="modal" data-bs-target="#usage">
-              使い方を開く
+            <button type="button" class="btn btn-success opacity-75 text-white" 
+                    data-bs-toggle="modal" 
+                    data-bs-target="#usageModal">
+              使い方をみる
             </button>
           </div>
         </div>
@@ -27,7 +29,7 @@
     </div>
   </div>
 
-  <%= render "shared/usage" %>
+              <%= render 'shared/usage' %>
 
   <div class="home-container">
     <div class="bottom-buttons">
