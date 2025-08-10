@@ -5,44 +5,45 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :body, presence: true, length: { maximum: 65535 }
 
-  def auto_likes_count
-    body_length = body.length
-
-    case body_length
-    when 0..20
-      rand(80..150)
-    when 21..50
-      rand(150..300)
-    when 51..100
-      rand(300..500)
-    when 101..200
-      rand(500..800)
-    else
-      rand(800..1200)
-    end
-
-    base_likes = body.length * rand(8..12)
-
-  # ポジティブワードボーナス
-  positive_words = %w[嬉しい 楽しい 良かった 最高 素晴らしい 幸せ 感謝 ありがとう 頑張]
-  positive_bonus = positive_words.count { |word| body.include?(word) } * rand(100..200)
-
-  # お疲れ様ワードボーナス
-  pessimistic_words = %w[疲れた 辛い 苦しい 最悪 大変 不幸 頑張った 無理 嫌だ]
-  pessimistic_bonus = pessimistic_words.count { |word| body.include?(word) } * rand(100..200)
-
-  total = base_likes + positive_bonus + pessimistic_bonus
-
-  # 最低保証いいね数
-  [ total, 50 ].max
-
+ def auto_likes_count
   # 投稿IDをシードにしてランダム値を固定
   Random.srand(id)
-  result = body.length * Random.rand(8..12)
-  Random.srand # リセット
-  result
+
+  body_length = body.length
+
+  # 1. 文字数による基本いいね数
+  base_likes = case body_length
+  when 0..20
+    Random.rand(80..150)
+  when 21..50
+    Random.rand(150..300)
+  when 51..100
+    Random.rand(300..500)
+  when 101..200
+    Random.rand(500..800)
+  else
+    Random.rand(800..1200)
   end
 
+  # 2. ポジティブワードボーナス
+  positive_words = %w[嬉しい 楽しい 良かった よかった 最高 素晴らしい 幸せ 感謝 ありがとう 頑張 がんば 褒め]
+  positive_bonus = positive_words.count { |word| body.include?(word) } * Random.rand(100..200)
+
+  # 3. ネガティブワードボーナス（共感系）
+  pessimistic_words = %w[疲れ つかれ 辛 つらい めんど 苦し くるし 最悪 大変 不幸 頑張った 無理 嫌だ 悲し かなし]
+  pessimistic_bonus = pessimistic_words.count { |word| body.include?(word) } * Random.rand(100..200)
+
+  # 4. 合計計算
+  total = base_likes + positive_bonus + pessimistic_bonus
+
+  # 5. 最低保証いいね数
+  result = [ total, 50 ].max
+
+  # ランダムシードリセット
+  Random.srand
+
+  result
+end
   # Xシェア用トークンの生成
 
   scope :shared, -> { where(is_shared: true) }

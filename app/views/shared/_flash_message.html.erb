@@ -1,10 +1,14 @@
+<link rel="stylesheet" href="/flash_message.css">
+
 <% flash.each do |message_type, message| %>
-  <div class="alert alert-<%= message_type %> alert-dismissible fade show" role="alert">
+  <div class="alert alert-<%= message_type %> alert-dismissible fade show flash-auto-hide diary-message" role="alert" data-auto-hide-time="3000">
     <%= message %>
     <button type="button" 
             class="btn-close" 
-            onclick="this.parentElement.remove()" 
+            data-bs-dismiss="alert" 
             aria-label="Close">
     </button>
   </div>
 <% end %>
+
+<script src="/flash_message.js"></script>
