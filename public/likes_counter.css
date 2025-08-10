@@ -130,6 +130,8 @@
 
 
 
+/* スマホレスポンジブ　*/
+
 @media (max-width: 768px) {
   .post-card-body {
     min-height: auto;
@@ -162,8 +164,21 @@
   /* 詳細・共有ボタンのボタンサイズ調整（小さめに） */
   .post-card-body > .d-flex.justify-content-between.align-items-center > div:nth-child(2) > a.btn {
     margin-left: 0;
-    font-size: 0.8rem;
-    padding: 0.25rem 0.5rem;
+    font-size: 1.0rem;
+    padding: 0.25rem 1.0rem;
+  }
+
+  /* いいねハートとカウント */
+  .likes-counter-instagram .heart-icon {
+    font-size: 1.0rem !important;
+  }
+
+  .likes-counter-instagram .count {
+    font-size: 1.0rem !important;
+  }
+
+  .likes-counter-instagram .heart-icon {
+    color: #ffffff !important;
   }
 }
 
