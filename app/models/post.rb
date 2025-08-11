@@ -5,25 +5,25 @@ class Post < ApplicationRecord
   validates :title, presence: true, length: { maximum: 255 }
   validates :body, presence: true, length: { maximum: 65535 }
 
- def auto_likes_count
-  # 投稿IDをシードにしてランダム値を固定
-  Random.srand(id)
+  def auto_likes_count
+    # 投稿IDをシードにしてランダム値を固定
+    Random.srand(id)
 
-  body_length = body.length
+    body_length = body.length
 
-  # 1. 文字数による基本いいね数
-  base_likes = case body_length
-  when 0..20
-    Random.rand(80..150)
-  when 21..50
-    Random.rand(150..300)
-  when 51..100
-    Random.rand(300..500)
-  when 101..200
-    Random.rand(500..800)
-  else
-    Random.rand(800..1200)
-  end
+    # 1. 文字数による基本いいね数
+    base_likes = case body_length
+    when 0..20
+      Random.rand(80..150)
+    when 21..50
+      Random.rand(150..300)
+    when 51..100
+      Random.rand(300..500)
+    when 101..200
+      Random.rand(500..800)
+    else
+      Random.rand(800..1200)
+    end
 
   # 2. ポジティブワードボーナス
   positive_words = %w[嬉しい 楽しい 良かった よかった 最高 素晴らしい 幸せ 感謝 ありがとう 頑張 がんば 褒め]

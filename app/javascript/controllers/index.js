@@ -6,4 +6,3 @@ import HelloController from "./hello_controller"
 // コントローラーを手動登録
 application.register("hello", HelloController)
 
-console.log("Stimulus controllers registered successfully!")

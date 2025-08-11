@@ -1,5 +1,4 @@
 document.addEventListener('turbo:load', function() {
-  console.log('Flash message setup');
   
   const alerts = document.querySelectorAll('.flash-auto-hide');
   
@@ -13,14 +12,12 @@ document.addEventListener('turbo:load', function() {
         // Bootstrap の標準的な削除方法を使用
         const bsAlert = new bootstrap.Alert(alert);
         bsAlert.close();
-        console.log('Flash message auto-hidden');
       }
     }, hideTime);
     
     // 手動削除された場合のタイマークリア
     alert.addEventListener('closed.bs.alert', function() {
       clearTimeout(autoHideTimer);
-      console.log('Manual close detected, timer cleared');
     });
   });
 });

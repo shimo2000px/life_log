@@ -87,6 +87,14 @@
   color: #ff3040; /* ♥の時の色 */
   transform: scale(1.1);
 }
+
+  .share-title {
+    text-align: center;
+  }
+    .share-title .name::after {
+    content: "\A"; /* 改行 */
+    white-space: pre;
+  }
 }
 
 .diary-index{
