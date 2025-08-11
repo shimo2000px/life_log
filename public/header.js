@@ -1,5 +1,4 @@
 document.addEventListener('turbo:load', function() {
-  console.log('🚀 Navbar setup');
   
   // 既存のリスナーをクリーンアップ
   const existingHandler = document.querySelector('#navbarNav')?._clickHandler;

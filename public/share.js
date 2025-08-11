@@ -2,7 +2,6 @@ function startCountAnimation(element, counter, likesBlock, heartIcon, heartsCont
   const delay = index * 200;
   
   const animationTimeout = setTimeout(() => {
-    console.log(`アニメーション開始: target=${target}, index=${index}`);
     
     // 既存のCSSアニメーションクラスを使用
     if (likesBlock) {
@@ -25,7 +24,6 @@ function startCountAnimation(element, counter, likesBlock, heartIcon, heartsCont
           }
           clearInterval(timer);
           
-          console.log(`カウント完了: ${target}`);
           
           // 最終アニメーション（既存デザインを維持）
           setTimeout(() => {
@@ -41,9 +39,7 @@ function startCountAnimation(element, counter, likesBlock, heartIcon, heartsCont
                 likesBlock.classList.remove('animating');
               }
               
-              console.log('アニメーション完了');
             } catch (error) {
-              console.error('最終アニメーションエラー:', error);
             }
           }, 200);
         } else {
@@ -52,7 +48,6 @@ function startCountAnimation(element, counter, likesBlock, heartIcon, heartsCont
           }
         }
       } catch (error) {
-        console.error('カウントアニメーションエラー:', error);
         clearInterval(timer);
       }
     }, intervalTime);
@@ -67,7 +62,6 @@ function startCountAnimation(element, counter, likesBlock, heartIcon, heartsCont
       try {
         animateExplodingHearts(heartsContainer, target);
       } catch (error) {
-        console.error('ハート爆発アニメーションエラー:', error);
       }
     }
     
@@ -157,24 +151,19 @@ function clearExistingAnimations(element) {
 
 // 自動初期化関数（改良版）
 function initializeLikesCounters() {
-  console.log('🔍 デザイン維持版自動初期化開始');
-  console.log('現在のURL:', window.location.pathname);
   
   // 投稿一覧ページでのみ実行 + シェアページも追加
   if (
       !window.location.pathname.includes('/posts') &&
   window.location.pathname !== '/' &&
   !window.location.pathname.startsWith('/shared/')){
-    console.log('❌ 対象ページではありません');
     return;
   }
   
   // 全ての要素を取得
   const allElements = document.querySelectorAll('.likes-counter-instagram');
-  console.log('📋 全要素数:', allElements.length);
   
   if (allElements.length === 0) {
-    console.log('⚠️ 対象要素がありません');
     return;
   }
   
@@ -183,15 +172,12 @@ function initializeLikesCounters() {
     return !element.classList.contains('animated');
   });
   
-  console.log('📋 未初期化要素数:', elements.length);
   
   if (elements.length === 0) {
-    console.log('⚠️ 未初期化要素がありません（全て処理済み）');
     return;
   }
 
     elements.forEach((element, index) => {
-    console.log(`\n=== 要素${index}の処理開始 ===`);
     
     try {
       // 既存のアニメーションをクリア（安全のため）
@@ -201,8 +187,6 @@ function initializeLikesCounters() {
       const targetFromData = element.dataset.target;
       const targetFromAttr = element.getAttribute('data-target');
       
-      console.log('dataset.target:', targetFromData);
-      console.log('getAttribute:', targetFromAttr);
       
       // 値を数値に変換
       let likes = 0;
@@ -211,14 +195,10 @@ function initializeLikesCounters() {
       if (rawValue !== null && rawValue !== undefined && rawValue !== '') {
         likes = parseInt(rawValue);
         if (isNaN(likes)) {
-          console.log('❌ 数値変換失敗:', rawValue);
           likes = 0;
         } else {
-          console.log('✅ 取得成功:', likes);
         }
       } else {
-        console.log('❌ data-target値が取得できません');
-        console.log('要素のouterHTML:', element.outerHTML.substring(0, 300));
       }
       
       // 要素を取得（既存のクラス名を使用）
@@ -227,22 +207,14 @@ function initializeLikesCounters() {
       const heartIcon = element.querySelector('.heart-icon');
       const heartsContainer = element.querySelector('.hearts-container');
       
-      console.log('要素確認:', {
-        counter: !!counter,
-        likesBlock: !!likesBlock,
-        heartIcon: !!heartIcon,
-        heartsContainer: !!heartsContainer
-      });
       
       // 必須要素チェック
       if (!counter) {
-        console.log('❌ counter要素が見つかりません');
         return;
       }
       
       // アニメーション実行（0以上の場合）
       if (likes >= 0) {
-        console.log(`🎬 アニメーション実行準備: ${likes}`);
         
         // 初期化済みマークを先に付ける（重複実行防止）
         element.classList.add('animated');
@@ -252,29 +224,23 @@ function initializeLikesCounters() {
           startCountAnimation(element, counter, likesBlock, heartIcon, heartsContainer, likes, index);
         } else {
           // いいね数が0の場合は即座に完了状態にする
-          console.log('⚠️ いいね数が0のため、アニメーションをスキップ');
           counter.textContent = '0';
         }
       } else {
-        console.log('❌ likes値が不正:', likes);
       }
       
     } catch (error) {
-      console.error(`要素${index}の処理中にエラー:`, error);
       // エラーが発生しても他の要素の処理は続行
     }
   });
   
-  console.log('🎉 初期化処理完了');
 }
 
 // ページ読み込み時の初期化システム
 function setupLikesAnimation() {
-  console.log('🚀 デザイン維持版セットアップ開始');
   
   // 重複実行防止フラグ
   if (window.likesAnimationSetup) {
-    console.log('⚠️ セットアップ済みのため、スキップ');
     return;
   }
   window.likesAnimationSetup = true;
@@ -284,37 +250,31 @@ function setupLikesAnimation() {
     try {
       initializeLikesCounters();
     } catch (error) {
-      console.error('初期化中にエラーが発生:', error);
     }
   }
   
   // DOMContentLoaded後に実行
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-      console.log('📄 DOMContentLoaded - 初期化実行');
       setTimeout(safeInitialize, 100);
     });
   } else {
     // 既に読み込み済みの場合は即座に実行
-    console.log('📄 DOM既読み込み済み - 即座に初期化実行');
     setTimeout(safeInitialize, 100);
   }
   
   // Turbo対応（Rails 7の場合）
   document.addEventListener('turbo:load', () => {
-    console.log('🚄 turbo:load - 初期化実行');
     setTimeout(safeInitialize, 100);
   });
   
   // 従来のTurbolinks対応
   document.addEventListener('turbolinks:load', () => {
-    console.log('🚄 turbolinks:load - 初期化実行');
     setTimeout(safeInitialize, 100);
   });
   
   // ページ離脱時のクリーンアップ
   window.addEventListener('beforeunload', () => {
-    console.log('🧹 ページ離脱 - クリーンアップ実行');
     
     // 全てのアニメーションをクリア
     const elements = document.querySelectorAll('.likes-counter-instagram');
@@ -322,7 +282,6 @@ function setupLikesAnimation() {
       try {
         clearExistingAnimations(element);
       } catch (error) {
-        console.error('クリーンアップエラー:', error);
       }
     });
     
@@ -370,12 +329,10 @@ function injectMinimalCSS() {
   `;
   
   document.head.appendChild(style);
-  console.log('🎨 最小限CSSアニメーション定義を追加しました');
 }
 
 // メイン実行関数
 function main() {
-  console.log('🚀 デザイン維持版いいねカウンターシステム起動');
   
   try {
     // 最小限CSSを注入
@@ -384,16 +341,14 @@ function main() {
     // アニメーションシステムをセットアップ
     setupLikesAnimation();
     
-    console.log('✅ システム起動完了');
   } catch (error) {
-    console.error('❌ システム起動エラー:', error);
   }
 }
 
 // 即座に実行（スクリプト読み込み時）
 main();
 
-// グローバルに公開（デバッグ用）
+
 window.likesAnimationDebug = {
   initialize: initializeLikesCounters,
   clearAnimations: (selector = '.likes-counter-instagram') => {
@@ -403,19 +358,15 @@ window.likesAnimationDebug = {
     window.likesAnimationSetup = false;
     setupLikesAnimation();
   },
-  // 新しいデバッグ機能
+
   testAnimation: (likesCount = 150) => {
-    console.log('🧪 テストアニメーション実行');
     const testElement = document.querySelector('.likes-counter-instagram');
     if (testElement) {
       clearExistingAnimations(testElement);
       testElement.dataset.target = likesCount;
       initializeLikesCounters();
     } else {
-      console.log('❌ テスト対象要素が見つかりません');
     }
   }
 };
 
-console.log('🎯 デザイン維持版システム読み込み完了');
-console.log('🔧 デバッグ用関数: window.likesAnimationDebug');
