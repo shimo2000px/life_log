@@ -6,24 +6,25 @@
                 current_user ? home_path : root_path, 
                 class: "navbar-brand fw-bold text-success yomogi-font" %>
     
-    <!-- ハンバーガーボタン（重要な修正箇所） -->
+    <!-- ハンバーガーボタン -->
     <button class="navbar-toggler" 
             type="button" 
             data-bs-toggle="collapse" 
             data-bs-target="#navbarNav"
             aria-controls="navbarNav"
             aria-expanded="false"
-            aria-label="Toggle navigation">
+            aria-label="Toggle navigation"
+            data-turbo="false">
       <span class="navbar-toggler-icon"></span>
     </button>
     
-    <!-- 折りたたみ可能なナビゲーション -->
+    <!-- ユーザーアイコン -->
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
         <% if logged_in? %>
           <!-- プロフィール情報 -->
           <li class="nav-item d-flex align-items-center me-3">
-            <span class="navbar-text d-flex align-items-center">
+                      <span class="navbar-text d-flex align-items-center">
               <% if current_user.profile_image.present? %>
                 <%= image_tag current_user.profile_image, 
                     class: "rounded-circle me-2", 
@@ -36,9 +37,10 @@
               <% end %>
               <%= current_user.nick_name %>さん
             </span>
+
           </li>
           
-          <!-- ナビゲーションリンク -->
+          <!-- 項目 -->
           <li class="nav-item">
             <%= link_to "日記投稿", new_post_path, 
                         class: "nav-link mt-1",
@@ -76,3 +78,5 @@
     </div>
   </div>
 </header>
+
+<script src="/header.js"></script>

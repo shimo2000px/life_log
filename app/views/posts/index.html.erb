@@ -4,7 +4,7 @@
 <div class="container mt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h2 class="diary-index fade-in-up">あなたの日記一覧</h2>
-    <%= link_to '新しい日記を書く', new_post_path, class: 'btn btn-primary fade-in-up' %>
+    <%= link_to '新しい日記を書く', new_post_path, class: 'btn btn-primary opacity-75 fade-in-up diary-new mb-2' %>
   </div>
 
   <% if @posts.any? %>
@@ -63,7 +63,7 @@
 
                 <!-- 右側：詳細ボタン・Twitterボタン -->
               <!-- 右側：詳細ボタン・Twitterボタン -->
-              <div class="btn-group">
+              
                 <%= link_to post_path(post), 
                             data: { method: :post }, 
                             class: "btn btn-outline-primary", 
@@ -83,7 +83,7 @@
                     <i class="bi bi-twitter"></i> Xで共有
                   <% end %>
                 <% end %>
-              </div>
+              
             </div>
           </div>
         </div>

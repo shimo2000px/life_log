@@ -75,3 +75,14 @@
   transform: translateY(30px);
   animation: fadeInUp 1.2s ease-out forwards;
 }
+
+@media (max-width: 768px) {
+  h1.diary-title {
+    font-size: 1.8rem; 
+  }
+
+  .btn-outline-secondary {
+    font-size: 1.0rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
