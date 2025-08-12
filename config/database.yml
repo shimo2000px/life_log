@@ -24,6 +24,9 @@ default: &default
 
 development:
   <<: *default
+  host: db
+  username: postgres
+  password: password
   database: myapp_development
 
   # The specified database role being used to connect to PostgreSQL.
@@ -58,6 +61,9 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
+  host: db
+  username: postgres
+  password: password
   database: myapp_test
 
 # As with config/credentials.yml, you never want to store sensitive information,
@@ -79,24 +85,8 @@ test:
 #
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
-#
-default: &default
-  adapter: postgresql
-  encoding: unicode
-  # For details on connection pooling, see Rails configuration guide
-  # https://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: db
-  username: postgres
-  password: password
 
-development:
-  <<: *default
-  database: myapp_development
-
-test:
-  <<: *default
-  database: myapp_test
 
 production:
+  <<: *default 
   url: <%= ENV['DATABASE_URL'] %>
