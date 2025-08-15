@@ -14,7 +14,6 @@ module Myapp
     config.active_job.queue_adapter = :inline
 
     config.cache_store = :memory_store
-    config.solid_cache.connects_to = nil
 
     # Please, add to the `ignore` list any other `lib` subdirectories that do
     # not contain `.rb` files, or that should not be reloaded or eager loaded.
