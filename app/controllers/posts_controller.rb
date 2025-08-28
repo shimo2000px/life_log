@@ -66,7 +66,7 @@ class PostsController < ApplicationController
 
     # シェア用の文言とURLを生成
     tweet_text = "#{@post.user.nick_name}さんの素敵な1日をのぞいてみよう✨ #ふぅ日記"
-    share_url = shared_post_url(@post.share_token, host: "9fc4da839ee8.ngrok-free.app", protocol: "https", port: nil)
+    share_url = shared_post_url(@post.share_token, host: "life-log-dany.onrender.com", protocol: "https", port: nil)
     tweet_url = "https://twitter.com/intent/tweet?url=#{CGI.escape(share_url)}&text=#{CGI.escape(tweet_text)}"
 
     # Twitter投稿画面にリダイレクト
