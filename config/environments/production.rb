@@ -102,5 +102,4 @@ config.action_mailer.smtp_settings = {
   authentication:       "plain",
   enable_starttls_auto: true
 }
-
 end
