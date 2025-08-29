@@ -35,7 +35,7 @@ gem "bootstrap5-kaminari-views"
 
 gem "dotenv-rails"
 
-gem "letter_opener_web", "2.0.0"
+gem "letter_opener_web", "3.0.0"
 
 gem "cloudinary"
 
