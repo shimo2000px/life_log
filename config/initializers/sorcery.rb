@@ -1,15 +1,8 @@
 Rails.application.config.sorcery.submodules = [ :reset_password, :remember_me ]
 
 Rails.application.config.sorcery.configure do |config|
-  # Remember Me機能のグローバル設定
-  config.remember_me_httponly = true  # XSS攻撃対策
-  config.remember_me_secure = Rails.env.production?  # HTTPS必須
-  config.remember_me_token_persist_globally = false  # セキュリティ向上
-
-  # 本番環境用の追加設定
-  if Rails.env.production?
-    config.remember_me_same_site = :lax
-  end
+  # Remember Me機能の基本設定のみ
+  config.remember_me_httponly = true
 
   config.user_config do |user|
     # 既存のパスワードリセット設定
