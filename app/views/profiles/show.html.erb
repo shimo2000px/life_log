@@ -10,8 +10,8 @@
           <div class="row">
             <!-- プロフィール画像 -->
             <div class="col-md-4 text-center">
-              <% if @user.profile_image.present? %>
-                <%= image_tag @user.profile_image, 
+              <% if @user.profile_image.attached? %>
+                <%= image_tag url_for(@user.profile_image), 
                     class: "rounded-circle", 
                     style: "width: 150px; height: 150px; object-fit: cover;" %>
               <% else %>
