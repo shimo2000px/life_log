@@ -37,6 +37,9 @@ gem "dotenv-rails"
 
 gem "letter_opener_web", "2.0.0"
 
+gem "cloudinary"
+
+gem "activestorage-cloudinary-service"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false

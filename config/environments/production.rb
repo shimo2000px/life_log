@@ -88,6 +88,9 @@ Rails.application.configure do
 
   config.assets.initialize_on_precompile = false
 
+  
+  config.active_storage.service = :cloudinary
+
 
 
 config.action_mailer.default_url_options = { host: "life-log-dany.onrender.com", protocol: "https" }
