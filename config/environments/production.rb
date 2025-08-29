@@ -88,7 +88,7 @@ Rails.application.configure do
 
   config.assets.initialize_on_precompile = false
 
-  
+
   config.active_storage.service = :cloudinary
 
 
