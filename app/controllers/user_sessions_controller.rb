@@ -6,7 +6,7 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    @user = login(params[:email], params[:password])
+    @user = login(params[:email], params[:password], true)
   if @user
     redirect_to home_path, success: "ログインしました"
   else
@@ -17,6 +17,6 @@ end
 
   def destroy
     logout
-    redirect_to root_path, danger: "ログアウトしました", status: :see_other
+    redirect_to root_path, success: "ログアウトしました", status: :see_other
   end
 end
