@@ -51,5 +51,5 @@
 
 
 ## ER図
-![ER図](<img width="501" height="481" alt="Image" src="https://github.com/user-attachments/assets/7249297b-6228-439e-8727-7e41bfd76c55" />)
+![ER図](images/life_log.drawio.png)
 
