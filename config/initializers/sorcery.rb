@@ -1,12 +1,24 @@
-Rails.application.config.sorcery.submodules = [ :reset_password ]
+Rails.application.config.sorcery.submodules = [ :reset_password, :remember_me ]
 
 Rails.application.config.sorcery.configure do |config|
+  # Remember Me機能の設定
+  config.remember_me_for = 60 * 60 * 24 * 14  # 2週間
+
+  # 本番環境用のセキュリティ設定
+  config.remember_me_httponly = true
+  config.remember_me_secure = Rails.env.production?
+  config.remember_me_token_persist_globally = false
+
+  # 本番環境用の追加設定
+  if Rails.env.production?
+    config.remember_me_same_site = :lax  # :strict だと厳しすぎる場合があるので :lax を推奨
+  end
+
   config.user_config do |user|
-    user.reset_password_mailer = UserMailer  # ← クラス名（文字列でもOK）
+    # 既存のパスワードリセット設定
+    user.reset_password_mailer = UserMailer
     user.reset_password_email_method_name = :reset_password_email
     user.reset_password_expiration_period = 60 * 60
-
-    # 重要：カラム名を明示的に指定
     user.reset_password_email_sent_at_attribute_name = :reset_password_sent_at
   end
 
