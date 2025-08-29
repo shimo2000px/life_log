@@ -11,8 +11,13 @@
 admin_email    = ENV.fetch("ADMIN_EMAIL")
 admin_password = ENV.fetch("ADMIN_PASSWORD")
 
-User.find_or_create_by!(email: admin_email) do |u|
-  u.password   = admin_password
-  u.password_confirmation = admin_password
-  u.admin = true
-end
+admin_user = User.find_or_initialize_by(email: admin_email)
+
+admin_user.admin = true
+
+  if admin_user.new_record?
+    admin_user.password = admin_password
+    admin_user.password_confirmation = admin_password
+  end
+
+admin_user.save!
