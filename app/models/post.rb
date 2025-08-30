@@ -26,11 +26,11 @@ class Post < ApplicationRecord
     end
 
   # 2. ポジティブワードボーナス
-  positive_words = %w[嬉しい 楽しい 良かった よかった 最高 素晴らしい 幸せ 感謝 ありがとう 頑張 がんば 褒め]
+  positive_words = %w[嬉しい 楽しい 良 よかった 最高 素晴らしい 幸せ 感謝 ありがとう 頑張 がんば 褒め 安心 癒 好き すき 充実 ハッピー ラッキー]
   positive_bonus = positive_words.count { |word| body.include?(word) } * Random.rand(100..200)
 
   # 3. ネガティブワードボーナス（共感系）
-  pessimistic_words = %w[疲れ つかれ 辛 つらい めんど 苦し くるし 最悪 大変 不幸 頑張った 無理 嫌だ 悲し かなし]
+  pessimistic_words = %w[疲 つかれ 辛 つらい めんど 苦 くるし 最悪 大変 不幸 頑張った 無理 嫌 悲 かなし 残念 痛 泣 休 眠 きつ だる]
   pessimistic_bonus = pessimistic_words.count { |word| body.include?(word) } * Random.rand(100..200)
 
   # 4. 合計計算
